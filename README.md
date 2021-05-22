@@ -1,3 +1,4 @@
+
 ## HRMS 
 ### JavaCampDay6Homework3
 
@@ -9,6 +10,6 @@
 
 + İş pozisyonları listesi: 
 
-> ![output](https://user-images.githubusercontent.com/46132459/118379758-99f46100-b5e5-11eb-92cb-3a662598ac4d.PNG)
+> ![positionAll](https://user-images.githubusercontent.com/46132459/119229968-ea5a4a00-bb22-11eb-8099-6cd60ae98fcc.PNG)
 
 
