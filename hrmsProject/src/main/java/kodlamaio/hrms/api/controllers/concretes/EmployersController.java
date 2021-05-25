@@ -30,8 +30,8 @@ public class EmployersController {
 		return this.employerService.getAll();
 	}
 	@PostMapping("/resigter")
-	public Result register(@RequestBody Employer employer ) {
-		return this.employerService.register(employer);
+	public Result register(@RequestBody Employer employer , String passwordAgain ) {
+		return this.employerService.register(employer, passwordAgain);
 	}
 	
 

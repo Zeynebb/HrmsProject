@@ -8,6 +8,7 @@ import kodlamaio.hrms.entities.concretes.JobPosition;
 public interface JobPositionService {
 	
 	public List<JobPosition> getAll();
+	public List<String> getAllEmail();
 	public Result add(JobPosition jobPosition);
 
 }

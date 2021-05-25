@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import kodlamaio.hrms.entities.concretes.JobPosition;
 public class JobPositionManager implements JobPositionService {
 
 	private JobPositionDao jobPositionDao;
+	private List<String> jobPositions = new ArrayList<>();
 
 	@Autowired
 	public JobPositionManager(JobPositionDao jobPositionDao) {
@@ -38,12 +40,17 @@ public class JobPositionManager implements JobPositionService {
 
 	public boolean positionIsItUsed(String positionName) {
 		boolean result = true;
-		for (int i = 0; i < getAll().size(); i++) {
-			if (getAll().get(i).getPositionName() == positionName) {
-				result = false;
-			}
+		if(getAllEmail().contains(positionName)) {
+			result = false;
 		}
 		return result;
+	}
+	@Override
+	public List<String> getAllEmail(){
+		for (int i = 0; i < getAll().size(); i++) {
+			jobPositions.add(getAll().get(i).getPositionName());
+		}
+		return jobPositions;
 	}
 
 }

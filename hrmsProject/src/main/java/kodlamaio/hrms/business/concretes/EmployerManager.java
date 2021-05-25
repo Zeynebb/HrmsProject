@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.common.base.Objects;
+
 import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
@@ -32,20 +35,9 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
-	public Result login(String email, String password) {
-		Result result= new ErrorResult("Giriş Başarısız!");
-		for (int i = 0; i < getAll().size(); i++) {
-			if(getAll().get(i).getEmail()==email && getAll().get(i).getPassword()==password) {
-				result = new SuccessResult("Giriş Başarılı");
-			}
-		}
-		return result;
-	}
-
-	@Override
-	public Result register(Employer employer) {
+	public Result register(Employer employer, String passwordAgain) {
 		Result result=new ErrorResult("Kayıt Başarısız!");
-		if(emailIsItUsed(employer.getEmail())) {
+		if(emailIsItUsed(employer.getEmail()) && Objects.equal(passwordAgain, employer.getPassword())) {
 			emailSendService.emailSend(employer.getEmail());
 			employer.setVerificationStatus(false);//default 
 			this.employerDao.save(employer);

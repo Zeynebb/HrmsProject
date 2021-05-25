@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.google.common.base.Objects;
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
 import kodlamaio.hrms.core.abstracts.EmailCheckService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
@@ -35,22 +36,12 @@ public class JobSeekerManager implements JobSeekerService {
 	}
 
 	@Override
-	public Result login(String email, String password) {
-		Result result = new ErrorResult("Giriş Başarısız!");
-		for (int i = 0; i < getAll().size(); i++) {
-			if (getAll().get(i).getEmail() == email && getAll().get(i).getPassword() == password) {
-				result = new SuccessResult("Giriş Başarılı");
-			}
-		}
-		return result;
-	}
-
-	@Override
-	public Result register(JobSeeker jobSeeker) {
+	public Result register(JobSeeker jobSeeker, String passwordAgain) {
 		Result result = new ErrorResult("Kayıt Başarısız!");
 		if (emailCheckService.emailCheck(jobSeeker.getEmail()) && emailIsItUsed(jobSeeker.getEmail())
 				&& nationalityIdIsItUsed(jobSeeker.getNationalityId())
-				&& mernisCheckService.checkIfRealPerson(jobSeeker)) {
+				&& mernisCheckService.checkIfRealPerson(jobSeeker)
+				&& Objects.equal(passwordAgain, jobSeeker.getPassword())) {
 			emailSendService.emailSend(jobSeeker.getEmail());
 			this.jobSeekerDao.save(jobSeeker);
 			result = new SuccessResult("Kayıt Başarılı.");

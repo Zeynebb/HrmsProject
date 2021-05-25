@@ -22,7 +22,7 @@ public class JobSeeker extends Users implements Entities {
 	@Column(name="user_id")
 	@PrimaryKeyJoinColumn
 	private int userId;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
 

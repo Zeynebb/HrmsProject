@@ -28,12 +28,8 @@ public class JobSeekersController {
 	}
 	
 	@PostMapping("/register")
-	public Result register(@RequestBody JobSeeker jobSeeker) {
-		return this.jobSeekerService.register(jobSeeker);	
+	public Result register(@RequestBody JobSeeker jobSeeker, String passwordAgain) {
+		return this.jobSeekerService.register(jobSeeker, passwordAgain);	
 		
-	}
-	@PostMapping
-	public Result login(@RequestBody String email, String password) {
-		return this.jobSeekerService.login(email, password);
 	}
 }

@@ -6,8 +6,7 @@ import kodlamaio.hrms.entities.concretes.JobSeeker;
 
 public interface JobSeekerService {
 	
-	public Result login(String email, String password);
-	public Result register(JobSeeker jobSeeker);
+	public Result register(JobSeeker jobSeeker, String passwordAgain);
 	
 	public List<JobSeeker> getAll();
 	public List<String> getAllEmails();

@@ -16,8 +16,8 @@ public class MernisCheckAdapters implements MernisCheckService{
 		try {
 			result=client.TCKimlikNoDogrula(
 						Long.valueOf(jobSeeker.getNationalityId()), 
-						jobSeeker.getFirstName(), 
-						jobSeeker.getLastName(), 
+						jobSeeker.getFirstName().toUpperCase(), 
+						jobSeeker.getLastName().toUpperCase(), 
 						jobSeeker.getBirthYear());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
