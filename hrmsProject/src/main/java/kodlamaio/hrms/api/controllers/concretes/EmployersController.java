@@ -25,6 +25,7 @@ public class EmployersController {
 		this.employerService = employerService;
 	}
 	
+	
 	@GetMapping("/getAll")
 	public List<Employer> getAll() {
 		return this.employerService.getAll();
