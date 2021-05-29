@@ -39,7 +39,7 @@ public class JobAdvertisementsController {
 	public DataResult<List<JobAdvertisement>> getAllSorted() {
 		return this.jobAdvertisementService.getAllSorted();
 	}
-	@GetMapping("/getByEmployer_userId")
+	@GetMapping("/getByEmployerJobAdvertisements")
 	public DataResult<List<JobAdvertisement>> getByEmployer_userId(@RequestParam int userId) {
 		return this.jobAdvertisementService.getByEmployer_userId(userId);
 	}
