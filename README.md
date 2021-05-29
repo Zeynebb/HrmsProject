@@ -1,7 +1,5 @@
 
 ## HRMS 
-### JavaCampDay6Homework3
-
 
 + Veritabanı diyagramı:
 
