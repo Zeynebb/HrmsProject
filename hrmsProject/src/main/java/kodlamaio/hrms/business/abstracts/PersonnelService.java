@@ -11,5 +11,7 @@ public interface PersonnelService {
 	public List<Personnel> getAll();
 	
 	public Result register(Personnel personnel);
+	
+	public Result updateEmployerSetVerificationStatusForUserId(int employerId);
 
 }

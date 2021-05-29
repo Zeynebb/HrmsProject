@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.PersonnelService;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
+import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.PersonnelDao;
 import kodlamaio.hrms.entities.concretes.Personnel;
 
@@ -13,11 +14,13 @@ import kodlamaio.hrms.entities.concretes.Personnel;
 public class PersonnelManager implements PersonnelService{
 	
 	private PersonnelDao personnelDao;
+	private EmployerDao employerDao;
 	
 	@Autowired
-	public PersonnelManager(PersonnelDao personnelDao) {
+	public PersonnelManager(PersonnelDao personnelDao, EmployerDao employerDao) {
 		super();
 		this.personnelDao = personnelDao;
+		this.employerDao=employerDao;
 	}
 	@Override
 	public List<Personnel> getAll() {
@@ -27,6 +30,11 @@ public class PersonnelManager implements PersonnelService{
 	public Result register(Personnel personnel) {
 		this.personnelDao.save(personnel);
 		return new SuccessResult("Personel Eklendi.");
+	}
+	@Override
+	public Result updateEmployerSetVerificationStatusForUserId(int employerId) {
+		this.employerDao.updateEmployerSetVerificationStatusForUserId(employerId);
+		return new SuccessResult("İş Veren Onaylandı!");
 	}
 
 }
