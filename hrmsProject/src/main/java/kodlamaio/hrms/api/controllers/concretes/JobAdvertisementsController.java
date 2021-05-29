@@ -1,6 +1,9 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +42,7 @@ public class JobAdvertisementsController {
 	public DataResult<List<JobAdvertisement>> getAllSorted() {
 		return this.jobAdvertisementService.getAllSorted();
 	}
+
 	@GetMapping("/getByEmployerJobAdvertisements")
 	public DataResult<List<JobAdvertisement>> getByEmployer_userId(@RequestParam int userId) {
 		return this.jobAdvertisementService.getByEmployer_userId(userId);
@@ -47,6 +51,15 @@ public class JobAdvertisementsController {
 	@PostMapping("/add")
 	public Result jobAdvertisementAdd(@RequestBody JobAdvertisement jobAdvertisement) {
 		return this.jobAdvertisementService.jobAdvertisementAdd(jobAdvertisement);
+	}
+
+	@PostMapping("/closeTheJobAdvertisement")
+	@Transactional
+	public Result updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(
+			@RequestParam("jobAdvertisementId") int jobAdvertisementId,
+			@RequestParam("employerId") int employerId) {
+		return this.jobAdvertisementService
+				.updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(jobAdvertisementId, employerId);
 	}
 
 }

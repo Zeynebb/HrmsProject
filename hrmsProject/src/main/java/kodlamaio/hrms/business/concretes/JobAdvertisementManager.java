@@ -62,4 +62,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployer_userId(userId),
 				"Firmanın İş İlanları Listelendi.");
 	}
+
+	@Override
+	public Result updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(int jobAdvertisementId,
+			int employerId) {
+		this.jobAdvertisementDao.updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(jobAdvertisementId, employerId);
+		return new SuccessResult("İlan Kapatıldı!");
+	}
 }

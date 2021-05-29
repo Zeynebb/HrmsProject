@@ -14,5 +14,6 @@ public interface JobAdvertisementService {
 	public DataResult<List<JobAdvertisement>> getByAdvertisementStatus(boolean status);	
 	public Result jobAdvertisementAdd(JobAdvertisement jobAdvertisement);
 	
+	public Result updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(int jobAdvertisementId, int employerId);
 
 }
