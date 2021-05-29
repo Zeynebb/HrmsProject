@@ -5,7 +5,8 @@
 
 + Veritabanı diyagramı:
 
-> ![databaseDiagram](https://user-images.githubusercontent.com/46132459/119398960-fab82380-bce0-11eb-9b29-41f75140d22c.PNG)
+> ![HRMSdatabase](https://user-images.githubusercontent.com/46132459/120082320-f28a2a80-c0ca-11eb-9a37-92655d340104.PNG)
+
 
 
 
