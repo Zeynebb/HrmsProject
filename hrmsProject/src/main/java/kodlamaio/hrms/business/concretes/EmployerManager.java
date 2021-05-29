@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.common.base.Objects;
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.core.abstracts.EmailDomainCheckService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
@@ -18,13 +19,16 @@ public class EmployerManager implements EmployerService {
 
 	private EmployerDao employerDao;
 	private EmailSendService emailSendService;
+	private EmailDomainCheckService emailDomainChekService;
 	private List<String> emails = new ArrayList<>();
 
 	@Autowired
-	public EmployerManager(EmployerDao employerDao, EmailSendService emailSendService) {
+	public EmployerManager(EmployerDao employerDao, EmailSendService emailSendService,
+			EmailDomainCheckService emailDomainChekService) {
 		super();
 		this.employerDao = employerDao;
 		this.emailSendService = emailSendService;
+		this.emailDomainChekService = emailDomainChekService;
 	}
 
 	@Override
@@ -35,7 +39,9 @@ public class EmployerManager implements EmployerService {
 	@Override
 	public Result register(Employer employer, String passwordAgain) {
 		Result result = new ErrorResult("Kayıt Başarısız!");
-		if (emailIsItUsed(employer.getEmail()) && Objects.equal(passwordAgain, employer.getPassword())) {
+		if (emailIsItUsed(employer.getEmail()) && Objects.equal(passwordAgain, employer.getPassword())
+				&& emailDomainChekService.domainCheck(employer.getEmail(), employer.getWebsite())
+				&& employer.getPhoneNumber().length()!=11) {
 			emailSendService.emailSend(employer.getEmail());
 			employer.setVerificationStatus(false);// default
 			this.employerDao.save(employer);
@@ -59,4 +65,5 @@ public class EmployerManager implements EmployerService {
 		}
 		return emails;
 	}
+
 }
