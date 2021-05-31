@@ -1,9 +1,7 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +13,7 @@ import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementWithEmployerWithJobPositionDto;
 
 @RestController
 @RequestMapping("/api/jobAdvertisement")
@@ -38,7 +37,7 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getByAdvertisementStatus(status);
 	}
 
-	@GetMapping("/getAllActiveSorted")
+	@GetMapping("/getAllSorted")
 	public DataResult<List<JobAdvertisement>> getAllSorted() {
 		return this.jobAdvertisementService.getAllSorted();
 	}
@@ -56,10 +55,18 @@ public class JobAdvertisementsController {
 	@PostMapping("/closeTheJobAdvertisement")
 	@Transactional
 	public Result updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(
-			@RequestParam("jobAdvertisementId") int jobAdvertisementId,
-			@RequestParam("employerId") int employerId) {
+			@RequestParam("jobAdvertisementId") int jobAdvertisementId, @RequestParam("employerId") int employerId) {
 		return this.jobAdvertisementService
 				.updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(jobAdvertisementId, employerId);
+	}
+
+	@GetMapping("/getAllActiveSorted")
+	public DataResult<List<JobAdvertisement>> getAllActiveSorted() {
+		return this.jobAdvertisementService.getAllActiveSorted();
+	}
+	@GetMapping("/getJobAdvertisementWithEmployerWithJobPositionDetails")
+	public DataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>> getJobAdvertisementWithEmployerWithJobPositionDetails() {
+		return this.jobAdvertisementService.getJobAdvertisementWithEmployerWithJobPositionDetails();
 	}
 
 }

@@ -7,9 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import kodlamaio.hrms.entities.abstracts.Entities;
 import kodlamaio.hrms.entities.abstracts.Users;
 import lombok.Data;

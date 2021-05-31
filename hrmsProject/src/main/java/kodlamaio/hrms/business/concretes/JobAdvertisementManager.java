@@ -13,6 +13,7 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementWithEmployerWithJobPositionDto;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService {
@@ -66,7 +67,21 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	@Override
 	public Result updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(int jobAdvertisementId,
 			int employerId) {
-		this.jobAdvertisementDao.updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(jobAdvertisementId, employerId);
+		this.jobAdvertisementDao.updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(jobAdvertisementId,
+				employerId);
 		return new SuccessResult("İlan Kapatıldı!");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getAllActiveSorted() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllActiveSorted(),
+				"İş İlanları Listelendi.");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>> getJobAdvertisementWithEmployerWithJobPositionDetails() {
+		return new SuccessDataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>>(
+				this.jobAdvertisementDao.getJobAdvertisementWithEmployerWithJobPositionDetails(),
+				"İş İlanları Tablo Şekinde Listelendi Listelendi.");
 	}
 }
