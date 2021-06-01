@@ -16,29 +16,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "job_positions")
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisement"})//ekle dene
-public class JobPosition {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "position_id")
-	private int positionId;
-
-	@Column(name = "position_name")
-	private String positionName;
-
-	@Column(name = "user_id")
-	private int positionUserId;
-
-	@OneToMany(mappedBy = "position")
-	private List<JobAdvertisement> jobAdvertisement; 
+@NoArgsConstructor
+@Table(name="foreign_languages")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cvForeignLanguages"})
+public class ForeignLanguage {
 	
-	@OneToMany(mappedBy = "jobPosition")
-	private List<WorkExperience> workExperiences;
+	@Id
+	@Column(name="foreign_language_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int foreignLanguageId;
+	
+	@Column(name="foreign_language_name")
+	private String foreignLanguageName;
+
+	@OneToMany(mappedBy = "foreignLanguage")
+	private List<CvForeignLanguage> cvForeignLanguages;
 	
 }

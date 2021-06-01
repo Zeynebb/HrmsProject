@@ -1,7 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,29 +15,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "job_positions")
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisement"})//ekle dene
-public class JobPosition {
+@NoArgsConstructor
+@Table(name="university_departments")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "educationInformations"})
+public class UniversityDepartment {
 
+	
 	@Id
+	@Column(name="university_department_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "position_id")
-	private int positionId;
-
-	@Column(name = "position_name")
-	private String positionName;
-
-	@Column(name = "user_id")
-	private int positionUserId;
-
-	@OneToMany(mappedBy = "position")
-	private List<JobAdvertisement> jobAdvertisement; 
+	private int universityDepartmentId;
 	
-	@OneToMany(mappedBy = "jobPosition")
-	private List<WorkExperience> workExperiences;
+	@Column(name="university_department_name")
+	private String universityDepartmentName;
 	
+	@OneToMany(mappedBy = "universityDepartment")
+	private List<EducationInformation> educationInformations;
 }

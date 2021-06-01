@@ -16,29 +16,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "job_positions")
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisement"})//ekle dene
-public class JobPosition {
-
+@NoArgsConstructor
+@Table(name="social_media")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cvSocialMedia"})
+public class SocialMedia {
+	
 	@Id
+	@Column(name="social_media_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "position_id")
-	private int positionId;
-
-	@Column(name = "position_name")
-	private String positionName;
-
-	@Column(name = "user_id")
-	private int positionUserId;
-
-	@OneToMany(mappedBy = "position")
-	private List<JobAdvertisement> jobAdvertisement; 
+	private int socialMediaId;
 	
-	@OneToMany(mappedBy = "jobPosition")
-	private List<WorkExperience> workExperiences;
+	@Column(name="social_media_name")
+	private String socialMediaName;
+
 	
+	@OneToMany(mappedBy = "socialMedia")
+	List<CvSocialMedia> cvSocialMedia;
+
 }

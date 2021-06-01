@@ -16,29 +16,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "job_positions")
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisement"})//ekle dene
-public class JobPosition {
-
+@NoArgsConstructor
+@Table(name="universities")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "educationInformations"})
+public class University {
+	
 	@Id
+	@Column(name="university_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "position_id")
-	private int positionId;
-
-	@Column(name = "position_name")
-	private String positionName;
-
-	@Column(name = "user_id")
-	private int positionUserId;
-
-	@OneToMany(mappedBy = "position")
-	private List<JobAdvertisement> jobAdvertisement; 
+	private int universityId;
 	
-	@OneToMany(mappedBy = "jobPosition")
-	private List<WorkExperience> workExperiences;
-	
+	@Column(name="university_name")
+	private String universityname;
+		
+	@OneToMany(mappedBy = "university")
+	private List<EducationInformation> educationInformations;
+
 }
