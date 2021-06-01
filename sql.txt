@@ -8,6 +8,48 @@ CREATE TABLE public.cities
     PRIMARY KEY (city_id)
 );
 
+CREATE TABLE public.cv_foreign_languages
+(
+    cv_id integer NOT NULL,
+    foreign_language_id integer,
+    language_level_id integer,
+    PRIMARY KEY (cv_id)
+);
+
+CREATE TABLE public.cv_social_media
+(
+    cv_id integer NOT NULL,
+    social_media_id integer,
+    link character varying(200),
+    PRIMARY KEY (cv_id)
+);
+
+CREATE TABLE public.cv_technologies
+(
+    cv_id integer NOT NULL,
+    technology_id integer,
+    PRIMARY KEY (cv_id)
+);
+
+CREATE TABLE public.cvs
+(
+    cv_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 23504 CACHE 1 ),
+    photo_link character varying(200),
+    objective character varying(100),
+    job_seeker_id integer NOT NULL,
+    PRIMARY KEY (cv_id)
+);
+
+CREATE TABLE public.education_informations
+(
+    cv_id integer NOT NULL,
+    university_id integer NOT NULL,
+    university_department_id integer NOT NULL,
+    starting_date character varying(20) NOT NULL,
+    graduation_date character varying(20),
+    PRIMARY KEY (cv_id)
+);
+
 CREATE TABLE public.employers
 (
     user_id integer NOT NULL,
@@ -16,6 +58,13 @@ CREATE TABLE public.employers
     phone_number character varying(11) NOT NULL,
     verification_status boolean NOT NULL,
     PRIMARY KEY (user_id)
+);
+
+CREATE TABLE public.foreign_languages
+(
+    foreign_language_name character varying(100) NOT NULL,
+    foreign_language_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (foreign_language_id)
 );
 
 CREATE TABLE public.job_advertisements
@@ -28,9 +77,9 @@ CREATE TABLE public.job_advertisements
     position_amount integer NOT NULL,
     application_deadline date NOT NULL,
     advertisement_status boolean NOT NULL,
-    employer_id integer,
-    position_id integer,
-    release_date date,
+    employer_id integer NOT NULL,
+    position_id integer NOT NULL,
+    release_date date NOT NULL,
     PRIMARY KEY (job_advertisement_id)
 );
 
@@ -52,6 +101,20 @@ CREATE TABLE public.job_seekers
     PRIMARY KEY (user_id)
 );
 
+CREATE TABLE public.language_levels
+(
+    language_level_name character varying(30) NOT NULL,
+    language_level_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (language_level_id)
+);
+
+CREATE TABLE public.social_media
+(
+    social_media_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    social_media_name character varying(100) NOT NULL,
+    PRIMARY KEY (social_media_id)
+);
+
 CREATE TABLE public.system_personnels
 (
     user_id integer NOT NULL,
@@ -67,6 +130,103 @@ CREATE TABLE public.system_users
     user_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 23504 CACHE 1 ),
     PRIMARY KEY (user_id)
 );
+
+CREATE TABLE public.technologies
+(
+    technology_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 23504 CACHE 1 ),
+    technology_name character varying(100) NOT NULL,
+    PRIMARY KEY (technology_id)
+);
+
+CREATE TABLE public.universities
+(
+    university_name character varying(100) NOT NULL,
+    university_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (university_id)
+);
+
+CREATE TABLE public.university_departments
+(
+    university_department_name character varying(100) NOT NULL,
+    university_department_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (university_department_id)
+);
+
+CREATE TABLE public.work_experiences
+(
+    cv_id integer NOT NULL,
+    position_id integer NOT NULL,
+    workplace_name character varying(100) NOT NULL,
+    starting_date character varying(20) NOT NULL,
+    ending_date character varying(20),
+    PRIMARY KEY (cv_id)
+);
+
+ALTER TABLE public.cv_foreign_languages
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.cvs (cv_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cv_foreign_languages
+    ADD FOREIGN KEY (foreign_language_id)
+    REFERENCES public.foreign_languages (foreign_language_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cv_foreign_languages
+    ADD FOREIGN KEY (language_level_id)
+    REFERENCES public.language_levels (language_level_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cv_social_media
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.cvs (cv_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cv_social_media
+    ADD FOREIGN KEY (social_media_id)
+    REFERENCES public.social_media (social_media_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cv_technologies
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.cvs (cv_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cv_technologies
+    ADD FOREIGN KEY (technology_id)
+    REFERENCES public.technologies (technology_id)
+    NOT VALID;
+
+
+ALTER TABLE public.cvs
+    ADD FOREIGN KEY (job_seeker_id)
+    REFERENCES public.job_seekers (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.education_informations
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.cvs (cv_id)
+    NOT VALID;
+
+
+ALTER TABLE public.education_informations
+    ADD FOREIGN KEY (university_department_id)
+    REFERENCES public.university_departments (university_department_id)
+    NOT VALID;
+
+
+ALTER TABLE public.education_informations
+    ADD FOREIGN KEY (university_id)
+    REFERENCES public.universities (university_id)
+    NOT VALID;
+
 
 ALTER TABLE public.employers
     ADD FOREIGN KEY (user_id)
@@ -107,6 +267,18 @@ ALTER TABLE public.job_seekers
 ALTER TABLE public.system_personnels
     ADD FOREIGN KEY (user_id)
     REFERENCES public.system_users (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.work_experiences
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.cvs (cv_id)
+    NOT VALID;
+
+
+ALTER TABLE public.work_experiences
+    ADD FOREIGN KEY (position_id)
+    REFERENCES public.job_positions (position_id)
     NOT VALID;
 
 END;
