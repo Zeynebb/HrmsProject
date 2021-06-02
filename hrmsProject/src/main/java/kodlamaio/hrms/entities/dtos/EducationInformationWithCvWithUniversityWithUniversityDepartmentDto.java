@@ -16,10 +16,11 @@ public class EducationInformationWithCvWithUniversityWithUniversityDepartmentDto
 	private int universityId;
 	private String universityName;
 	private int departmentId;
+	private String universityDepartmentName;
 	private String startingDate;
 	private String graduationDate;
 	
-	private String universityDepartmentName;
+	
 	
 	
 }

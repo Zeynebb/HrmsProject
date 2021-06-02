@@ -31,6 +31,9 @@ public class EducationInformationManager implements EducationInformationService 
 
 	@Override
 	public Result add(EducationInformation educationInformation) {
+		if(educationInformation.getGraduationDate().isEmpty()) {
+			educationInformation.setGraduationDate("Devam Ediyor");
+		}
 		this.educationInformationDao.save(educationInformation);
 		return new SuccessResult("Eğitim bilgisi eklendi");
 	}

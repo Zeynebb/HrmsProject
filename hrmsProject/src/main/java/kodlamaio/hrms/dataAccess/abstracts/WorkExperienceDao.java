@@ -16,25 +16,7 @@ public interface WorkExperienceDao extends JpaRepository<WorkExperience, Integer
 			+ "From WorkExperience w Inner Join Cv c ON w.cv.cvId=c.cvId "
 			+ "Inner Join JobSeeker j ON w.cv.jobSeeker.userId=j.userId "
 			+ "Inner Join JobPosition p ON w.jobPosition.positionId=p.positionId "
-			+ "where w.cv.jobSeeker.userId=?1")
+			+ "where w.cv.jobSeeker.userId=?1 ORDER BY w.endingDate DESC")
 	List<WorkExperienceWithCvWithJobSeekerDto> getWorkExperienceWithCvWithJobSeekerDateils(int userId);
 	
-	
-	
-	/*@Query("Select new kodlamaio.hrms.entities.dtos.EducationInformationWithCvWithUniversityWithUniversityDepartmentDto("
-			+ "e.educationInformationId, c.cvId, u.universityId, u.universityName, d.universityDepartmentId, d.universityDepartmentName) "
-			+ "From EducationInformation e Inner Join University u ON e.university.universityId=u.universityId"
-			+ " Inner Join UniversityDepartment d ON e.universityDepartment.universityDepartmentId=d.universityDepartmentId"
-			+ " Inner Join e.cv c"
-			+ " where c.cvId=?1")
-	List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>
-	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(int cvId);
-	private int workExperienceId;
-	private String workplaceName;
-	private String startingDate;
-	private String endingdate;
-	private String positionName;
-	private String jobSeekerFirstname;
-	private String jobSeekerLastname;
-	*/
 }

@@ -32,6 +32,9 @@ public class WorkExperienceManager implements WorkExperienceService {
 
 	@Override
 	public Result add(WorkExperience workExperience) {
+		if(workExperience.getEndingDate().isEmpty()) {
+			workExperience.setEndingDate("Devam Ediyor");
+		}
 		this.workExperienceDao.save(workExperience);
 		return new SuccessResult("İş tecrübesi eklendi.");
 	}
