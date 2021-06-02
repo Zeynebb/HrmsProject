@@ -30,7 +30,7 @@ public class University {
 	private int universityId;
 	
 	@Column(name="university_name")
-	private String universityname;
+	private String universityName;
 		
 	@OneToMany(mappedBy = "university")
 	private List<EducationInformation> educationInformations;

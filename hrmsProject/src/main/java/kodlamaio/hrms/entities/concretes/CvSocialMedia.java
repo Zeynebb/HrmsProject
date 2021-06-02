@@ -1,6 +1,5 @@
 package kodlamaio.hrms.entities.concretes;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ public class CvSocialMedia {
 	@Column(name = "link")
 	private String link;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
 	private Cv cv;
 
