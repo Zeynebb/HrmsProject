@@ -1,3 +1,4 @@
+
 BEGIN;
 
 
@@ -11,24 +12,27 @@ CREATE TABLE public.cities
 CREATE TABLE public.cv_foreign_languages
 (
     cv_id integer NOT NULL,
-    foreign_language_id integer,
-    language_level_id integer,
-    PRIMARY KEY (cv_id)
+    foreign_language_id integer NOT NULL,
+    language_level_id integer NOT NULL,
+    foreign_languages_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (foreign_languages_id)
 );
 
 CREATE TABLE public.cv_social_media
 (
     cv_id integer NOT NULL,
-    social_media_id integer,
-    link character varying(200),
-    PRIMARY KEY (cv_id)
+    social_media_id integer NOT NULL,
+    link character varying(200) NOT NULL,
+    cv_social_media_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (cv_social_media_id)
 );
 
 CREATE TABLE public.cv_technologies
 (
     cv_id integer NOT NULL,
-    technology_id integer,
-    PRIMARY KEY (cv_id)
+    technology_id integer NOT NULL,
+    cv_technologies_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (cv_technologies_id)
 );
 
 CREATE TABLE public.cvs
@@ -47,7 +51,8 @@ CREATE TABLE public.education_informations
     university_department_id integer NOT NULL,
     starting_date character varying(20) NOT NULL,
     graduation_date character varying(20),
-    PRIMARY KEY (cv_id)
+    education_information_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (education_information_id)
 );
 
 CREATE TABLE public.employers
@@ -159,7 +164,8 @@ CREATE TABLE public.work_experiences
     workplace_name character varying(100) NOT NULL,
     starting_date character varying(20) NOT NULL,
     ending_date character varying(20),
-    PRIMARY KEY (cv_id)
+    work_experience_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
+    PRIMARY KEY (work_experience_id)
 );
 
 ALTER TABLE public.cv_foreign_languages
