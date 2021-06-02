@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -31,6 +33,10 @@ public class Cv {
 
 	@Column(name = "objective")
 	private String objective;
+	
+	@ManyToOne
+	@JoinColumn(name="job_seeker_id")
+	private JobSeeker jobSeeker;
 
 	@OneToOne(mappedBy = "cv",cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
