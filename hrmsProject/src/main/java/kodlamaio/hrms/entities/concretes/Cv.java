@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,9 +31,6 @@ public class Cv {
 	@Column(name = "cv_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cvId;
-
-	@Column(name = "photo_link")
-	private String photoLink;
 
 	@Column(name = "objective")
 	private String objective;
@@ -60,5 +58,8 @@ public class Cv {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cv")
 	private List<WorkExperience>  workExperience;
+	
+	@OneToOne(mappedBy = "cv")
+	private Photo photo;
 
 }

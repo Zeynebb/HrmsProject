@@ -1,10 +1,8 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import kodlamaio.hrms.business.abstracts.CvService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
@@ -30,15 +28,16 @@ public class CvManager  implements CvService{
 	}
 
 	@Override
-	public Result add(Cv cv) {
+	public Result add(Cv cv) {	
 		this.cvDao.save(cv);
-		return new SuccessResult("Cv Eklendi");
+		return new SuccessResult("Özgeçmiş eklendi.");
 	}
 
 	@Override
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(int userId) {
 		return new SuccessDataResult<List<Cv>>(this.cvDao.getByCvIdForJobSeekerId(userId));
 	}
+
 	
 	
 
