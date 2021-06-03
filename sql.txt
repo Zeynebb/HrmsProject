@@ -1,10 +1,9 @@
-
 BEGIN;
 
 
 CREATE TABLE public.cities
 (
-    city_id integer NOT NULL,
+    city_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
     city_name character varying(100) NOT NULL,
     PRIMARY KEY (city_id)
 );
@@ -38,7 +37,6 @@ CREATE TABLE public.cv_technologies
 CREATE TABLE public.cvs
 (
     cv_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 23504 CACHE 1 ),
-    photo_link character varying(200),
     objective character varying(100),
     job_seeker_id integer NOT NULL,
     PRIMARY KEY (cv_id)
@@ -111,6 +109,14 @@ CREATE TABLE public.language_levels
     language_level_name character varying(30) NOT NULL,
     language_level_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 30000 CACHE 1 ),
     PRIMARY KEY (language_level_id)
+);
+
+CREATE TABLE public.photos
+(
+    photo_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3000000 CACHE 1 ),
+    cv_id integer NOT NULL,
+    photo_url character varying(100),
+    PRIMARY KEY (photo_id)
 );
 
 CREATE TABLE public.social_media
@@ -267,6 +273,12 @@ ALTER TABLE public.job_positions
 ALTER TABLE public.job_seekers
     ADD FOREIGN KEY (user_id)
     REFERENCES public.system_users (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.photos
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.cvs (cv_id)
     NOT VALID;
 
 
