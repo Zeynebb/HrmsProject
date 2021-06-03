@@ -3,7 +3,8 @@
 
 + Veritabanı diyagramı:
 
-> ![databaseHRMSdiagram](https://user-images.githubusercontent.com/46132459/120466997-5f8e1080-c3a8-11eb-8896-e68e4f540472.PNG)
+> ![HRMSDatabase](https://user-images.githubusercontent.com/46132459/120724751-1ee3e380-c4dd-11eb-9941-f364e31c04cc.PNG)
+
 
 
 
