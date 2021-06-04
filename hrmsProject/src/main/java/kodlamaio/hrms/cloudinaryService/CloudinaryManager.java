@@ -22,9 +22,9 @@ public class CloudinaryManager {
 
 	@Autowired
 	public CloudinaryManager() {
-		valuesMap.put("cloud_name", "zeydatabase");
-		valuesMap.put("api_key", "286744313495218");
-		valuesMap.put("api_secret", "DY03XeGJQ51_YkdePMY3PmrCvXs");
+		valuesMap.put("cloud_name", "yourCloudName");
+		valuesMap.put("api_key", "yourApiKey");
+		valuesMap.put("api_secret", "youApiSecret");
 		cloudinary = new Cloudinary(valuesMap);
 
 	}
