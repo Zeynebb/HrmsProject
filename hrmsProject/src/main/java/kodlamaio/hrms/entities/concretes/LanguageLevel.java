@@ -30,7 +30,7 @@ public class LanguageLevel {
 	private int languageLevelId;
 	
 	@Column(name="language_level_name")
-	private String languageLevelname;
+	private String languageLevelName;
 		
 	@OneToMany(mappedBy = "languageLevel")
 	private List<CvForeignLanguage> cvForeignLanguages;

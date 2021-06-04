@@ -1,6 +1,7 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.io.IOException;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,13 @@ public class PhotosController {
 	public ResponseEntity<?> upload(@ModelAttribute("photo") Photo photo,  @RequestParam("multipartFile") MultipartFile multipartFile) throws IOException{
 		return new ResponseEntity<>(this.photoService.add(photo, multipartFile), HttpStatus.OK);
 	}
+	
+	@PostMapping("/photoUpdate")
+	@Transactional
+	public ResponseEntity<?> update(int cvId, MultipartFile multipartFile) throws IOException{
+		return new ResponseEntity<>(this.photoService.update(cvId, multipartFile), HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/photoDelete")
 	public ResponseEntity<?> delete(@PathVariable("id") String id) throws IOException{
 		return new ResponseEntity<>(this.photoService.delete(id), HttpStatus.OK);

@@ -32,6 +32,7 @@ public class CvsController {
 
 	@PostMapping("/addCv")
 	public Result add(@RequestBody Cv cv){
+	public Result add(@RequestBody Cv cv) {
 		return this.cvService.add(cv);
 	}
 	@PostMapping("/getByCvIdForJobSeeker_UserId")

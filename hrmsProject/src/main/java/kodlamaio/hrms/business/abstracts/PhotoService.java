@@ -11,6 +11,7 @@ public interface PhotoService {
 	
 	public Result add(Photo photo, MultipartFile multipartFile) throws IOException;
 	
+	public Result update(int cvId, MultipartFile multipartFile) throws IOException;
 	public Result delete(String id) throws IOException;
 	
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import kodlamaio.hrms.business.abstracts.PhotoService;
 import kodlamaio.hrms.core.abstracts.CloudinaryService;
+import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.PhotoDao;
@@ -27,17 +28,27 @@ public class PhotoManager implements PhotoService{
 
 	@Override
 	public Result add(Photo photo, MultipartFile multipartFile) throws IOException {
-		Map result = cloudinaryservice.photoUpload(multipartFile);
-		photo.setPhotoUrl(result.get("url").toString());
-		this.photoDao.save(photo);
 		//this.photoDao.updatePhotoSetPhotoUrlForCv_cvId(result.get("url").toString(), cvId);
-		return new SuccessResult("Fotoğraf Eklendi");
+		Result result= new ErrorResult("Fotoğraf Eklenemedi!");
+		Map photoMap = cloudinaryservice.photoUpload(multipartFile);
+		photo.setPhotoUrl(photoMap.get("url").toString());
+		if(!this.photoDao.getAllCvId().contains(photo.getCv().getCvId())) {
+			result = new SuccessResult("Fotoğraf Eklendi");
+			this.photoDao.save(photo);
+		}
+		return result;
 	}
-
 	@Override
 	public Result delete(String id) throws IOException {
 		this.cloudinaryservice.photoDelete(id);
 		return new SuccessResult("Fotoğraf Silindi");
+	}
+
+	@Override
+	public Result update(int cvId, MultipartFile multipartFile) throws IOException {
+		Map photoMap = cloudinaryservice.photoUpload(multipartFile);
+		this.photoDao.updatePhotoSetPhotoUrlForCv_cvId(photoMap.get("url").toString(), cvId);
+		return new SuccessResult("Fotoğraf Güncellendi");
 	}
 
 }
