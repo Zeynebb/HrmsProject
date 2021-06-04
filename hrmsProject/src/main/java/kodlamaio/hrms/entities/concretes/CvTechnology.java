@@ -20,9 +20,11 @@ public class CvTechnology {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cvTechnologiesId;
 		
+	
 	@ManyToOne
     @JoinColumn(name = "cv_id")
     private Cv cv;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="technology_id")

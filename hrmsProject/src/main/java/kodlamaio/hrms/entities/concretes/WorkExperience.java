@@ -33,10 +33,12 @@ public class WorkExperience {
 	@Column(name="ending_date")
 	private String endingDate;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
 	private Cv cv;
 		
+	
 	@ManyToOne
 	@JoinColumn(name="position_id")
 	private JobPosition jobPosition;

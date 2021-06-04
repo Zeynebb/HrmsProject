@@ -30,13 +30,16 @@ public class EducationInformation {
 	@Column(name="graduation_date")
 	private String graduationDate;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
 	private Cv cv;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="university_id")
 	private University university;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="university_department_id")

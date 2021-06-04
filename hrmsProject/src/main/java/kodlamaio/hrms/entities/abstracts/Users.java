@@ -9,6 +9,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import com.sun.istack.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,8 +30,12 @@ public class Users {
 
 	@Email(message = "Email should be valid")
 	@Column(name = "email")
+	@NotBlank
+	@NotNull
 	private String email;
 
+	@NotBlank
+	@NotNull
 	@Column(name = "password")
 	private String password;
 	

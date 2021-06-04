@@ -28,7 +28,6 @@ public class PhotoManager implements PhotoService{
 
 	@Override
 	public Result add(Photo photo, MultipartFile multipartFile) throws IOException {
-		//this.photoDao.updatePhotoSetPhotoUrlForCv_cvId(result.get("url").toString(), cvId);
 		Result result= new ErrorResult("Fotoğraf Eklenemedi!");
 		Map photoMap = cloudinaryservice.photoUpload(multipartFile);
 		photo.setPhotoUrl(photoMap.get("url").toString());

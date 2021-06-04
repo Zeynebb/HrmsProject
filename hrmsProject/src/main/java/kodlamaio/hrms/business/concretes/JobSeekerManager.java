@@ -1,6 +1,5 @@
 package kodlamaio.hrms.business.concretes;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,6 @@ public class JobSeekerManager implements JobSeekerService {
 	private JobSeekerDao jobSeekerDao;
 	private EmailSendService emailSendService;
 	private MernisCheckService mernisCheckService;
-	private List<String> emails = new ArrayList<>();
-	private List<String> nationalityIds = new ArrayList<>();
 
 	@Autowired
 	public JobSeekerManager(EmailCheckService emailCheckService, JobSeekerDao jobSeekerDao,
@@ -72,18 +69,12 @@ public class JobSeekerManager implements JobSeekerService {
 
 	@Override
 	public List<String> getAllEmails() {
-		for (int i = 0; i < getAll().size(); i++) {
-			emails.add(getAll().get(i).getEmail());
-		}
-		return emails;
+		return this.jobSeekerDao.getByEmail();
 	}
 
 	@Override
 	public List<String> getAllNationalityId() {
-		for (int i = 0; i < getAll().size(); i++) {
-			nationalityIds.add(getAll().get(i).getNationalityId());
-		}
-		return nationalityIds;
+		return this.jobSeekerDao.getByNationalityId();
 	}
 
 }

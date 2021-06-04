@@ -27,10 +27,12 @@ public class CvSocialMedia {
 	@Column(name = "link")
 	private String link;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
 	private Cv cv;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "social_media_id")
 	private SocialMedia socialMedia;

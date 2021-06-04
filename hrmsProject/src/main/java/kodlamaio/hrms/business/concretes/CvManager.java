@@ -12,10 +12,10 @@ import kodlamaio.hrms.dataAccess.abstracts.CvDao;
 import kodlamaio.hrms.entities.concretes.Cv;
 
 @Service
-public class CvManager  implements CvService{
+public class CvManager implements CvService {
 
 	private CvDao cvDao;
-		
+
 	@Autowired
 	public CvManager(CvDao cvDao) {
 		super();
@@ -28,7 +28,7 @@ public class CvManager  implements CvService{
 	}
 
 	@Override
-	public Result add(Cv cv) {	
+	public Result add(Cv cv) {
 		this.cvDao.save(cv);
 		return new SuccessResult("Özgeçmiş eklendi.");
 	}
@@ -37,8 +37,5 @@ public class CvManager  implements CvService{
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(int userId) {
 		return new SuccessDataResult<List<Cv>>(this.cvDao.getByCvIdForJobSeekerId(userId));
 	}
-
-	
-	
 
 }

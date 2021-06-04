@@ -19,6 +19,7 @@ import kodlamaio.hrms.entities.concretes.Cv;
 @CrossOrigin
 public class CvsController {
 	private CvService cvService;
+
 	@Autowired
 	public CvsController(CvService cvService) {
 		super();
@@ -31,10 +32,10 @@ public class CvsController {
 	}
 
 	@PostMapping("/addCv")
-	public Result add(@RequestBody Cv cv){
 	public Result add(@RequestBody Cv cv) {
 		return this.cvService.add(cv);
 	}
+
 	@PostMapping("/getByCvIdForJobSeeker_UserId")
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(@RequestParam int userId) {
 		return this.cvService.getByCvIdForJobSeeker_UserId(userId);
