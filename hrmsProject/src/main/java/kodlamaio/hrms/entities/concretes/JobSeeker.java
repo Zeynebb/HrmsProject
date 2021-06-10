@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kodlamaio.hrms.entities.abstracts.Entities;
@@ -30,18 +32,23 @@ public class JobSeeker extends Users implements Entities {
 	@PrimaryKeyJoinColumn
 	private int userId;
 
+	@NotEmpty(message = "İsim Boş Bırakılamaz!")
 	@Column(name = "first_name")
 	private String firstName;
 
+	@NotEmpty(message = "Soyisim Boş Bırakılamaz!")
 	@Column(name = "last_name")
 	private String lastName;
 
+	@NotEmpty(message = "Tc. Kimlik Numarası Boş Bırakılamaz!")
 	@Column(name = "nationality_id")
 	private String nationalityId;
 
+	@NotEmpty(message = "Doğum Yılı Boş Bırakılamaz!")
 	@Column(name = "birth_year")
 	private int birthYear;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "jobSeeker")
 	private List<Cv> cvs;
 

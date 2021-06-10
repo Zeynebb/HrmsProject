@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers.concretes;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import kodlamaio.hrms.entities.dtos.JobAdvertisementWithEmployerWithJobPositionD
 
 @RestController
 @RequestMapping("/api/jobAdvertisement")
+@CrossOrigin
 public class JobAdvertisementsController {
 
 	private JobAdvertisementService jobAdvertisementService;

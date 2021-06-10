@@ -12,10 +12,11 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CvForeignLanguageDao;
 import kodlamaio.hrms.entities.concretes.CvForeignLanguage;
+import kodlamaio.hrms.entities.dtos.CvForeignLanguageWithForeignLanguageDto;
 
 @Service
-public class CvForeignLanguageManager implements CvForeignLanguageService{
-	
+public class CvForeignLanguageManager implements CvForeignLanguageService {
+
 	private CvForeignLanguageDao cvForeignLanguageDao;
 
 	@Autowired
@@ -33,6 +34,13 @@ public class CvForeignLanguageManager implements CvForeignLanguageService{
 	public Result add(CvForeignLanguage cvForeignLanguage) {
 		this.cvForeignLanguageDao.save(cvForeignLanguage);
 		return new SuccessResult("Yabancı dil bilgisi eklendi.");
+	}
+
+	@Override
+	public DataResult<List<CvForeignLanguageWithForeignLanguageDto>> getCvForeignLanguageWithForeignLanguageDetails(
+			int cvId) {
+		return new SuccessDataResult<>(this.cvForeignLanguageDao.getCvForeignLanguageWithForeignLanguageDetails(cvId),
+				"Yabancı Dil Bilgileri Listelendi.");
 	}
 
 }

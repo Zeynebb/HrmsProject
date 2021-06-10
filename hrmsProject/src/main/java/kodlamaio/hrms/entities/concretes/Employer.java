@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kodlamaio.hrms.entities.abstracts.Entities;
 import kodlamaio.hrms.entities.abstracts.Users;
@@ -27,12 +30,18 @@ public class Employer extends Users implements Entities {
 	@PrimaryKeyJoinColumn
 	private int userId;
 
+	@NotNull(message = "Şirket ismi boş bırakılamaz!")
+	@NotBlank
 	@Column(name = "company_name")
 	private String companyName;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "website")
 	private String website;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	

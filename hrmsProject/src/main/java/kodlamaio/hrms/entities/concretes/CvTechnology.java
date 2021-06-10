@@ -22,7 +22,7 @@ public class CvTechnology {
 		
 	
 	@ManyToOne
-    @JoinColumn(name = "cv_id")
+    @JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
     private Cv cv;
 	
 	

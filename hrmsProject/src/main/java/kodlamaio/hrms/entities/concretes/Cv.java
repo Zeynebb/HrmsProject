@@ -35,7 +35,6 @@ public class Cv {
 	@Column(name = "objective")
 	private String objective;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="job_seeker_id")
 	private JobSeeker jobSeeker;

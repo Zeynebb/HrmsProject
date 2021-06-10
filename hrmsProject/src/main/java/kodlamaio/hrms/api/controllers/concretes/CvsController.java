@@ -40,5 +40,4 @@ public class CvsController {
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(@RequestParam int userId) {
 		return this.cvService.getByCvIdForJobSeeker_UserId(userId);
 	}
-
 }

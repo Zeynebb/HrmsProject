@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers.concretes;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,9 +14,9 @@ import kodlamaio.hrms.business.abstracts.PersonnelService;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.Personnel;
 
-
 @RestController
 @RequestMapping("/api/personnel")
+@CrossOrigin
 public class PersonnelsController {
 	
 	private PersonnelService personnelService;
@@ -26,7 +27,7 @@ public class PersonnelsController {
 		this.personnelService = personnelService;
 	}
 
-	@GetMapping("/getall")
+	@GetMapping("/getAll")
 	public List<Personnel> getAll(){
 		return this.personnelService.getAll();
 	}

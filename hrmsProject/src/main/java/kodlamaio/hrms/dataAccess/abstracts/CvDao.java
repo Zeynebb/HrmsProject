@@ -9,7 +9,6 @@ import kodlamaio.hrms.entities.concretes.Cv;
 
 public interface CvDao extends JpaRepository<Cv, Integer>{
 	
-	
 	@Query("From Cv c where c.jobSeeker.userId=?1")
 	List<Cv> getByCvIdForJobSeekerId(int userId);
 	

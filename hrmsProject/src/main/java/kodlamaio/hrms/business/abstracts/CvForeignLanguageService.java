@@ -5,6 +5,7 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.CvForeignLanguage;
+import kodlamaio.hrms.entities.dtos.CvForeignLanguageWithForeignLanguageDto;
 
 public interface CvForeignLanguageService {
 	
@@ -12,4 +13,5 @@ public interface CvForeignLanguageService {
 	
 	public Result add(CvForeignLanguage cvForeignLanguage);
 
+	DataResult<List<CvForeignLanguageWithForeignLanguageDto>> getCvForeignLanguageWithForeignLanguageDetails(int cvId);
 }

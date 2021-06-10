@@ -8,8 +8,10 @@ import kodlamaio.hrms.business.abstracts.JobSeekerService;
 import kodlamaio.hrms.core.abstracts.EmailCheckService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.abstracts.MernisCheckService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
@@ -63,8 +65,8 @@ public class JobSeekerManager implements JobSeekerService {
 	}
 
 	@Override
-	public List<JobSeeker> getAll() {
-		return this.jobSeekerDao.findAll();
+	public DataResult<List<JobSeeker>> getAll() {
+		return new SuccessDataResult<>(this.jobSeekerDao.findAll(), "Data Listelendi");
 	}
 
 	@Override
