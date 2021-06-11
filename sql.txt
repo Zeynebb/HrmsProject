@@ -83,6 +83,9 @@ CREATE TABLE public.job_advertisements
     employer_id integer NOT NULL,
     position_id integer NOT NULL,
     release_date date NOT NULL,
+    work_time_type_id integer NOT NULL,
+    work_type_id integer NOT NULL,
+    approval_status boolean NOT NULL,
     PRIMARY KEY (job_advertisement_id)
 );
 
@@ -174,6 +177,20 @@ CREATE TABLE public.work_experiences
     PRIMARY KEY (work_experience_id)
 );
 
+CREATE TABLE public.work_time_types
+(
+    work_time_type_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9000000 CACHE 1 ),
+    work_time_type_name character varying(100) NOT NULL,
+    PRIMARY KEY (work_time_type_id)
+);
+
+CREATE TABLE public.work_types
+(
+    work_type_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 900000 CACHE 1 ),
+    work_type_name character varying(100) NOT NULL,
+    PRIMARY KEY (work_type_id)
+);
+
 ALTER TABLE public.cv_foreign_languages
     ADD FOREIGN KEY (cv_id)
     REFERENCES public.cvs (cv_id)
@@ -261,6 +278,18 @@ ALTER TABLE public.job_advertisements
 ALTER TABLE public.job_advertisements
     ADD FOREIGN KEY (position_id)
     REFERENCES public.job_positions (position_id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (work_time_type_id)
+    REFERENCES public.work_time_types (work_time_type_id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (work_type_id)
+    REFERENCES public.work_types (work_type_id)
     NOT VALID;
 
 
