@@ -30,8 +30,12 @@ public class JobAdvertisementsController {
 	}
 
 	@GetMapping("/getAll")
-	public List<JobAdvertisement> getAll() {
+	public DataResult<List<JobAdvertisement>> getAll() {
 		return this.jobAdvertisementService.getAll();
+	}
+	@GetMapping("/getByJobAdvertisementId")
+	public DataResult<List<JobAdvertisement>> getByJobAdvertisementId(int id){
+		return this.jobAdvertisementService.getByJobAdvertisementId(id);
 	}
 
 	@GetMapping("/getAllActive")
@@ -66,6 +70,11 @@ public class JobAdvertisementsController {
 	public DataResult<List<JobAdvertisement>> getAllActiveSorted() {
 		return this.jobAdvertisementService.getAllActiveSorted();
 	}
+	@GetMapping("/getAllApproveStatus")
+	public DataResult<List<JobAdvertisement>> getAllApproveStatus(boolean status){
+		return this.jobAdvertisementService.getAllApproveStatus(status);
+	}
+	
 	@GetMapping("/getJobAdvertisementWithEmployerWithJobPositionDetails")
 	public DataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>> getJobAdvertisementWithEmployerWithJobPositionDetails() {
 		return this.jobAdvertisementService.getJobAdvertisementWithEmployerWithJobPositionDetails();

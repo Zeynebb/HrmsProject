@@ -8,11 +8,15 @@ import kodlamaio.hrms.entities.dtos.JobAdvertisementWithEmployerWithJobPositionD
 
 public interface JobAdvertisementService {
 
-	public List<JobAdvertisement> getAll();
+	public DataResult<List<JobAdvertisement>> getAll();
 
 	public DataResult<List<JobAdvertisement>> getAllSorted();
+	
+	public DataResult<List<JobAdvertisement>> getByJobAdvertisementId(int id);
 
 	public DataResult<List<JobAdvertisement>> getAllActiveSorted();
+	
+	public DataResult<List<JobAdvertisement>> getAllApproveStatus(boolean status);
 
 	public DataResult<List<JobAdvertisement>> getByEmployer_userId(int userId);
 

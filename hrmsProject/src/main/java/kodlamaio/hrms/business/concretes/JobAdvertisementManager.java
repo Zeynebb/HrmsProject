@@ -30,6 +30,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	public Result jobAdvertisementAdd(JobAdvertisement jobAdvertisement) {
 		Result result = new ErrorResult("Ekleme Başarısız!");
 		if (!jobAdvertisement.getJobDescription().isEmpty()) {
+			jobAdvertisement.setApprovalStatus(false);
 			this.jobAdvertisementDao.save(jobAdvertisement);
 			result = new SuccessResult("Ekleme Başarılı");
 		}
@@ -37,8 +38,8 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	}
 
 	@Override
-	public List<JobAdvertisement> getAll() {
-		return this.jobAdvertisementDao.findAll();
+	public DataResult<List<JobAdvertisement>> getAll() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(),"İş İlanları Listelendi");
 	}
 
 	@Override
@@ -83,5 +84,20 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessDataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>>(
 				this.jobAdvertisementDao.getJobAdvertisementWithEmployerWithJobPositionDetails(),
 				"İş İlanları Tablo Şekinde Listelendi Listelendi.");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getAllApproveStatus(boolean status) {
+		String message = "Onaylanmış ";
+		if (status == false) {
+			message = "Onaylanmamış ";
+		}
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByApprovalStatus(status),
+				message + " İş İlanları Listelendi.");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByJobAdvertisementId(int id) {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByJobAdvertisementId(id), "İş İlanı Listelendi.");
 	}
 }
