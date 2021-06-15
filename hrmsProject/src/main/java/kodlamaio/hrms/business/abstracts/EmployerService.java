@@ -8,6 +8,8 @@ public interface EmployerService {
 	
 	public Result register(Employer employer, String passwordAgain);
 	
+	public Result login( String email, String password);
+	
 	public List<Employer> getAll();
 	public List<String> getAllEmails();
 	

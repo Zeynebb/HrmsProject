@@ -13,6 +13,7 @@ import kodlamaio.hrms.business.abstracts.CvService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.Cv;
+import kodlamaio.hrms.entities.dtos.CvWithJobSeekerDto;
 
 @RestController
 @RequestMapping(value = "/api/cv")
@@ -35,8 +36,13 @@ public class CvsController {
 	public Result add(@RequestBody Cv cv) {
 		return this.cvService.add(cv);
 	}
+	
+	@GetMapping("/getCvWithJobSeekerDetails")
+	public DataResult<List<CvWithJobSeekerDto>> getCvWithJobSeekerDetails(int cvId){
+		return this.cvService.getCvWithJobSeekerDetails(cvId);
+	}
 
-	@PostMapping("/getByCvIdForJobSeeker_UserId")
+	@GetMapping("/getByCvIdForJobSeeker_UserId")
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(@RequestParam int userId) {
 		return this.cvService.getByCvIdForJobSeeker_UserId(userId);
 	}

@@ -1,12 +1,13 @@
 package kodlamaio.hrms.business.concretes;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.JobPositionService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobPositionDao;
 import kodlamaio.hrms.entities.concretes.JobPosition;
@@ -15,7 +16,6 @@ import kodlamaio.hrms.entities.concretes.JobPosition;
 public class JobPositionManager implements JobPositionService {
 
 	private JobPositionDao jobPositionDao;
-	private List<String> jobPositions = new ArrayList<>();
 
 	@Autowired
 	public JobPositionManager(JobPositionDao jobPositionDao) {
@@ -24,8 +24,8 @@ public class JobPositionManager implements JobPositionService {
 	}
 
 	@Override
-	public List<JobPosition> getAll() {
-		return jobPositionDao.findAll();
+	public DataResult<List<JobPosition>> getAll() {
+		return new SuccessDataResult<List<JobPosition>>(this.jobPositionDao.findAll());
 	}
 
 	@Override
@@ -40,17 +40,10 @@ public class JobPositionManager implements JobPositionService {
 
 	public boolean positionIsItUsed(String positionName) {
 		boolean result = true;
-		if(getAllEmail().contains(positionName)) {
+		if(this.jobPositionDao.getAllPositionName().contains(positionName)) {
 			result = false;
 		}
 		return result;
-	}
-	@Override
-	public List<String> getAllEmail(){
-		for (int i = 0; i < getAll().size(); i++) {
-			jobPositions.add(getAll().get(i).getPositionName());
-		}
-		return jobPositions;
 	}
 
 }

@@ -10,6 +10,7 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CvDao;
 import kodlamaio.hrms.entities.concretes.Cv;
+import kodlamaio.hrms.entities.dtos.CvWithJobSeekerDto;
 
 @Service
 public class CvManager implements CvService {
@@ -36,5 +37,10 @@ public class CvManager implements CvService {
 	@Override
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(int userId) {
 		return new SuccessDataResult<List<Cv>>(this.cvDao.getByCvIdForJobSeekerId(userId));
+	}
+
+	@Override
+	public DataResult<List<CvWithJobSeekerDto>> getCvWithJobSeekerDetails(int cvId) {
+		return new SuccessDataResult<List<CvWithJobSeekerDto>>(this.cvDao.getCvWithJobSeekerDetails(cvId), "Cv Listelendi");
 	}
 }

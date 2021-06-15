@@ -15,6 +15,7 @@ import kodlamaio.hrms.business.abstracts.WorkExperienceService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.WorkExperience;
+import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobPositionDto;
 import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobSeekerDto;
 
 @RestController
@@ -38,8 +39,13 @@ public class WorkExperiencesController {
 	public Result add(@RequestBody WorkExperience workExperience) {
 		return this.workExperienceService.add(workExperience);
 	}
+	@GetMapping("/getWorkExperienceWithCvWithJobPositionDetails")
+	public DataResult<List<WorkExperienceWithCvWithJobPositionDto>> getWorkExperienceWithCvWithJobPositionDetails(
+			@RequestParam int cvId){
+		return this.workExperienceService.getWorkExperienceWithCvWithJobPositionDetails(cvId);
+	}
 	
-	@PostMapping("/getWorkExperienceWithCvWithJobSeekerDateils")
+	@GetMapping("/getWorkExperienceWithCvWithJobSeekerDateils")
 	public DataResult<List<WorkExperienceWithCvWithJobSeekerDto>> getWorkExperienceWithCvWithJobSeekerDateils(
 			@RequestParam int userId){
 		return this.workExperienceService.getWorkExperienceWithCvWithJobSeekerDateils(userId);

@@ -12,6 +12,7 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CvTechnologyDao;
 import kodlamaio.hrms.entities.concretes.CvTechnology;
+import kodlamaio.hrms.entities.dtos.CvTechnologyWithTechnologyDto;
 
 @Service
 public class CvTechnologyManager implements CvTechnologyService{
@@ -33,6 +34,11 @@ public class CvTechnologyManager implements CvTechnologyService{
 	public Result add(CvTechnology cvTechnology) {
 		this.cvTechnologyDao.save(cvTechnology);
 		return new SuccessResult("Programlama dili eklendi.");
+	}
+
+	@Override
+	public DataResult<List<CvTechnologyWithTechnologyDto>> getCvTechnologyWithTechnologydetails(int cvId) {
+		return new SuccessDataResult<List<CvTechnologyWithTechnologyDto>>(this.cvTechnologyDao.getCvTechnologyWithTechnologydetails(cvId),"Teknolojiler Listelendi");
 	}
 
 }

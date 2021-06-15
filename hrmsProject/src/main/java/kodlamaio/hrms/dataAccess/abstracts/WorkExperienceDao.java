@@ -6,9 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kodlamaio.hrms.entities.concretes.WorkExperience;
+import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobPositionDto;
 import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobSeekerDto;
 
 public interface WorkExperienceDao extends JpaRepository<WorkExperience, Integer>{
+	
+	
+	@Query("Select new kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobPositionDto("
+			+ "w.workplaceName, w.startingDate, w.endingDate, p.positionName) "
+			+ "From WorkExperience w Inner Join Cv c ON w.cv.cvId=c.cvId "
+			+ "Inner Join JobPosition p ON w.jobPosition.positionId=p.positionId "
+			+ "where w.cv.cvId=?1 ORDER BY w.endingDate DESC")
+	List<WorkExperienceWithCvWithJobPositionDto> getWorkExperienceWithCvWithJobPositionDetails(int cvId);
 
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobSeekerDto("

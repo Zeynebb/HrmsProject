@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.CvSocialMediaService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.CvSocialMedia;
+import kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto;
 
 @RestController
 @RequestMapping("/api/cvSocialMedia")
@@ -35,6 +37,11 @@ public class CvSocialMediaController {
 	@PostMapping("/add")
 	public Result add(@RequestBody CvSocialMedia cvSocialMedia) {
 		return this.cvSocialMediaService.add(cvSocialMedia);
+	}
+	
+	@GetMapping("/getCvSocialMediaWithSocialMediaDetails")
+	public DataResult<List<CvSocialMediaWithSocialMediaDto>> getCvSocialMediaWithSocialMediaDetails(@RequestParam int cvId){
+		return this.cvSocialMediaService.getCvSocialMediaWithSocialMediaDetails(cvId);
 	}
 
 }

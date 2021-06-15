@@ -33,8 +33,13 @@ public class JobAdvertisementsController {
 	public DataResult<List<JobAdvertisement>> getAll() {
 		return this.jobAdvertisementService.getAll();
 	}
+	
+	@PostMapping("/add")
+	public Result jobAdvertisementAdd(@RequestBody JobAdvertisement jobAdvertisement) {
+		return this.jobAdvertisementService.jobAdvertisementAdd(jobAdvertisement);
+	}
 	@GetMapping("/getByJobAdvertisementId")
-	public DataResult<List<JobAdvertisement>> getByJobAdvertisementId(int id){
+	public DataResult<JobAdvertisement> getByJobAdvertisementId(@RequestParam int id){
 		return this.jobAdvertisementService.getByJobAdvertisementId(id);
 	}
 
@@ -53,10 +58,6 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getByEmployer_userId(userId);
 	}
 
-	@PostMapping("/add")
-	public Result jobAdvertisementAdd(@RequestBody JobAdvertisement jobAdvertisement) {
-		return this.jobAdvertisementService.jobAdvertisementAdd(jobAdvertisement);
-	}
 
 	@PostMapping("/closeTheJobAdvertisement")
 	@Transactional

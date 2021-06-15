@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Data
@@ -23,18 +21,18 @@ public class CvForeignLanguage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cvforeignLanguageId;
 	
-	@JsonIgnore
+	
 	@ManyToOne
     @JoinColumn(name = "cv_id")
     private Cv cv;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="language_level_id")
 	private LanguageLevel languageLevel;
 	
-	@JsonIgnore
-	@ManyToOne
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="foreign_language_id")
 	private ForeignLanguage foreignLanguage;
 	

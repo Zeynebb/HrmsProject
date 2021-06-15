@@ -40,9 +40,9 @@ public class EducationInformationManager implements EducationInformationService 
 
 	@Override
 	public DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>> 
-	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(int userId) {
+	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(int cvId) {
 		return new SuccessDataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>>(
-				this.educationInformationDao.getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(userId));
+				this.educationInformationDao.getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(cvId));
 	}
 
 }

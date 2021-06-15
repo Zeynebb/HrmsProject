@@ -12,7 +12,7 @@ public interface JobAdvertisementService {
 
 	public DataResult<List<JobAdvertisement>> getAllSorted();
 	
-	public DataResult<List<JobAdvertisement>> getByJobAdvertisementId(int id);
+	public DataResult<JobAdvertisement> getByJobAdvertisementId(int id);
 
 	public DataResult<List<JobAdvertisement>> getAllActiveSorted();
 	

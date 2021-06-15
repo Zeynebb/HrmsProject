@@ -47,7 +47,7 @@ public class Employer extends Users implements Entities {
 	
 	@Column(name="verification_status")
 	private boolean verificationStatus;
-	
+		
 	@OneToMany(mappedBy = "employer")
 	private List<JobAdvertisement> jobAdvertisement;
  

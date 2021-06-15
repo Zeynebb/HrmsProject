@@ -7,13 +7,15 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.TechnologyService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
+import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.TechnologyDao;
 import kodlamaio.hrms.entities.concretes.Technology;
 
 @Service
-public class TechnologyManager implements TechnologyService{
-	
+public class TechnologyManager implements TechnologyService {
+
 	private TechnologyDao technologyDao;
 
 	@Autowired
@@ -25,6 +27,12 @@ public class TechnologyManager implements TechnologyService{
 	@Override
 	public DataResult<List<Technology>> getAll() {
 		return new SuccessDataResult<List<Technology>>(this.technologyDao.findAll(), "Teknolojiler Listelendi");
+	}
+
+	@Override
+	public Result add(Technology technology) {
+		this.technologyDao.save(technology);
+		return new SuccessResult("Teknoloji Eklendi.");
 	}
 
 }

@@ -12,6 +12,7 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.WorkExperienceDao;
 import kodlamaio.hrms.entities.concretes.WorkExperience;
+import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobPositionDto;
 import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobSeekerDto;
 
 @Service
@@ -32,7 +33,7 @@ public class WorkExperienceManager implements WorkExperienceService {
 
 	@Override
 	public Result add(WorkExperience workExperience) {
-		if(workExperience.getEndingDate().isEmpty()) {
+		if (workExperience.getEndingDate().isEmpty()) {
 			workExperience.setEndingDate("Devam Ediyor");
 		}
 		this.workExperienceDao.save(workExperience);
@@ -44,6 +45,13 @@ public class WorkExperienceManager implements WorkExperienceService {
 			int userId) {
 		return new SuccessDataResult<List<WorkExperienceWithCvWithJobSeekerDto>>(
 				this.workExperienceDao.getWorkExperienceWithCvWithJobSeekerDateils(userId));
+	}
+
+	@Override
+	public DataResult<List<WorkExperienceWithCvWithJobPositionDto>> getWorkExperienceWithCvWithJobPositionDetails(
+			int cvId) {
+		return new SuccessDataResult<List<WorkExperienceWithCvWithJobPositionDto>>(this.workExperienceDao.getWorkExperienceWithCvWithJobPositionDetails(cvId),
+				"İş Tecrübeleri Listelendi");
 	}
 
 }

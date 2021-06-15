@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 public class EducationInformationWithCvWithUniversityWithUniversityDepartmentDto {
 
 	private int educationId;
-	private String firstName;
-	private String lastName;
 	private int cvId;
 	private int universityId;
 	private String universityName;

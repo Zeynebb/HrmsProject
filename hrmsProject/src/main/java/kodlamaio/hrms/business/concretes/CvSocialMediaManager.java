@@ -12,12 +12,13 @@ import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CvSocialMediaDao;
 import kodlamaio.hrms.entities.concretes.CvSocialMedia;
+import kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto;
 
 @Service
-public class CvSocialMediaManager implements CvSocialMediaService{
+public class CvSocialMediaManager implements CvSocialMediaService {
 
 	private CvSocialMediaDao cvSocialMediaDao;
-	
+
 	@Autowired
 	public CvSocialMediaManager(CvSocialMediaDao cvSocialMediaDao) {
 		super();
@@ -33,6 +34,12 @@ public class CvSocialMediaManager implements CvSocialMediaService{
 	public Result add(CvSocialMedia cvSocialMedia) {
 		this.cvSocialMediaDao.save(cvSocialMedia);
 		return new SuccessResult("Sosyal meyda bilgileri eklendi.");
+	}
+
+	@Override
+	public DataResult<List<CvSocialMediaWithSocialMediaDto>> getCvSocialMediaWithSocialMediaDetails(int cvId) {
+		return new SuccessDataResult<List<CvSocialMediaWithSocialMediaDto>>(this.cvSocialMediaDao.getCvSocialMediaWithSocialMediaDetails(cvId),
+				"Sosyal Medyalar Listelendi");
 	}
 
 }

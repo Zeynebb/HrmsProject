@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.CvTechnologyService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.CvTechnology;
+import kodlamaio.hrms.entities.dtos.CvTechnologyWithTechnologyDto;
 
 @RestController
 @RequestMapping("/api/cvTechnology")
@@ -37,6 +39,10 @@ public class CvTechnologiesController {
 		return this.cvTechnologyService.add(cvTechnology);
 	}
 	
+	@GetMapping("/getCvTechnologyWithTechnologydetails")
+	public DataResult<List<CvTechnologyWithTechnologyDto>> getCvTechnologyWithTechnologydetails(@RequestParam int cvId){
+		return this.cvTechnologyService.getCvTechnologyWithTechnologydetails(cvId);
+	}
 	
 
 }

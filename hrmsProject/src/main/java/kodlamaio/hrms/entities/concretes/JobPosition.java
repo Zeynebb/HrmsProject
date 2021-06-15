@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisement"})//ekle dene
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisement"})
 public class JobPosition {
 
 	@Id
@@ -32,9 +32,6 @@ public class JobPosition {
 
 	@Column(name = "position_name")
 	private String positionName;
-
-	@Column(name = "user_id")
-	private int positionUserId;
 
 	@OneToMany(mappedBy = "position")
 	private List<JobAdvertisement> jobAdvertisement; 
