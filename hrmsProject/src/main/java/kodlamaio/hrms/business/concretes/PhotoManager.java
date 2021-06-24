@@ -1,24 +1,27 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import kodlamaio.hrms.business.abstracts.PhotoService;
 import kodlamaio.hrms.core.abstracts.CloudinaryService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.PhotoDao;
 import kodlamaio.hrms.entities.concretes.Photo;
 
 @Service
-public class PhotoManager implements PhotoService{
+public class PhotoManager implements PhotoService {
 
 	private PhotoDao photoDao;
 	private CloudinaryService cloudinaryservice;
-	
+
 	@Autowired
 	public PhotoManager(PhotoDao photoDao, CloudinaryService cloudinaryservice) {
 		super();
@@ -27,16 +30,22 @@ public class PhotoManager implements PhotoService{
 	}
 
 	@Override
+	public DataResult<List<Photo>> getAll() {
+		return new SuccessDataResult<>(this.photoDao.findAll(),"Fotoğraflar Listelendi");
+	}
+
+	@Override
 	public Result add(Photo photo, MultipartFile multipartFile) throws IOException {
-		Result result= new ErrorResult("Fotoğraf Eklenemedi!");
+		Result result = new ErrorResult("Fotoğraf Eklenemedi!");
 		Map photoMap = cloudinaryservice.photoUpload(multipartFile);
 		photo.setPhotoUrl(photoMap.get("url").toString());
-		if(!this.photoDao.getAllCvId().contains(photo.getCv().getCvId())) {
+		if (!this.photoDao.getAllCvId().contains(photo.getCv().getCvId())) {
 			result = new SuccessResult("Fotoğraf Eklendi");
 			this.photoDao.save(photo);
 		}
 		return result;
 	}
+
 	@Override
 	public Result delete(String id) throws IOException {
 		this.cloudinaryservice.photoDelete(id);
@@ -50,4 +59,9 @@ public class PhotoManager implements PhotoService{
 		return new SuccessResult("Fotoğraf Güncellendi");
 	}
 
+	@Override
+	public DataResult<List<Photo>> getByPhotoForCvId(int cvId) {
+		return new SuccessDataResult<List<Photo>>(this.photoDao.getByPhotoForCvId(cvId), 
+				"Fotoğraf Listelendi.");
+	}
 }

@@ -12,6 +12,6 @@ public interface PersonnelService {
 	
 	public Result register(Personnel personnel);
 	
-	public Result updateEmployerSetVerificationStatusForUserId(int employerId);
+	public Result updateEmployerSetVerificationStatusForUserId(int employerId, boolean status);
 
 }

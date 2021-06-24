@@ -1,6 +1,8 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +35,12 @@ public class PhotosController {
 		this.photoService = photoService;
 	}
 	@GetMapping("/getAll")
-	public DataResult<Photo> getAll(){
-		return null;
+	public DataResult<List<Photo>> getAll(){
+		return this.photoService.getAll();
+	}
+	@GetMapping("/getByPhotoForCvId")
+	public DataResult<List<Photo>> getByPhotoForCvId(@RequestParam int cvId){
+		return this.photoService.getByPhotoForCvId(cvId);
 	}
 	
 	@PostMapping("/photoAdd")

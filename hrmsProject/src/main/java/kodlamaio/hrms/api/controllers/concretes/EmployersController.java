@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.abstracts.ValidationService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
@@ -45,6 +46,16 @@ public class EmployersController {
 	public Result login( @RequestParam("email") String email, @RequestParam("password") String password) {
 		return this.employerService.login(email,password);
 	}
+	
+	@GetMapping("/getByEmployerUserId")
+	public DataResult<Employer> getByUserId(int userId){
+		return this.employerService.getByUserId(userId);
+	}
+	
+	@GetMapping("/getAllEmployerByVerificationStatus")
+	public DataResult<List<Employer>> getAllEmployerByVerificationStatus(boolean status) {
+		return this.employerService.getAllEmployerByVerificationStatus(status);
+	}	
 
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@Valid @RequestBody Employer employer,

@@ -18,9 +18,9 @@ import kodlamaio.hrms.entities.concretes.Personnel;
 @RequestMapping("/api/personnel")
 @CrossOrigin
 public class PersonnelsController {
-	
+
 	private PersonnelService personnelService;
-	
+
 	@Autowired
 	public PersonnelsController(PersonnelService personnelService) {
 		super();
@@ -28,18 +28,20 @@ public class PersonnelsController {
 	}
 
 	@GetMapping("/getAll")
-	public List<Personnel> getAll(){
+	public List<Personnel> getAll() {
 		return this.personnelService.getAll();
 	}
-	
+
 	@PostMapping("/register")
 	public Result register(@RequestBody Personnel personnel) {
 		return this.personnelService.register(personnel);
 	}
+
 	@Transactional
 	@PostMapping("/employerVerification")
-	public Result updateEmployerSetVerificationStatusForUserId(@RequestParam("employerId") int employerId) {
-		return this.personnelService.updateEmployerSetVerificationStatusForUserId(employerId);
+	public Result updateEmployerSetVerificationStatusForUserId(@RequestParam("employerId") int employerId,
+			@RequestParam("status") boolean status) {
+		return this.personnelService.updateEmployerSetVerificationStatusForUserId(employerId, status);
 	}
 
 }

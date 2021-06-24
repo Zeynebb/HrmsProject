@@ -9,8 +9,10 @@ import com.google.common.base.Objects;
 import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.abstracts.EmailDomainCheckService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.ErrorResult;
 import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
@@ -71,11 +73,22 @@ public class EmployerManager implements EmployerService {
 
 	@Override
 	public Result login(String email, String password) {
-		Result result=new ErrorResult("Giriş Başarısız!");
-		if(Objects.equal(this.userDao.getPasswordByEmail(email), password)) {
+		Result result = new ErrorResult("Giriş Başarısız!");
+		if (Objects.equal(this.userDao.getPasswordByEmail(email), password)) {
 			result = new SuccessResult("Giriş Başarılı.");
 		}
 		return result;
+	}
+
+	@Override
+	public DataResult<List<Employer>> getAllEmployerByVerificationStatus(boolean status) {
+		return new SuccessDataResult<List<Employer>>(this.employerDao.getAllEmployerByVerificationStatus(status),
+				"İş Verenler Listelendi.");
+	}
+
+	@Override
+	public DataResult<Employer> getByUserId(int userId) {
+		return new SuccessDataResult<Employer>(this.employerDao.getByUserId(userId),"İş Veren Bilgileri Listelendi.");
 	}
 
 }

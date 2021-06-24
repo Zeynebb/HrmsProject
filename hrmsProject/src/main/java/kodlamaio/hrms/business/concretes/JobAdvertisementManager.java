@@ -39,10 +39,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
 	@Override
 	public DataResult<List<JobAdvertisement>> getAll() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(),"İş İlanları Listelendi");
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(),
+				"İş İlanları Listelendi");
 	}
 
-	@Override
+	@Override // Aktif-pasif iş ilanları listeleme
 	public DataResult<List<JobAdvertisement>> getByAdvertisementStatus(boolean status) {
 		String message = "Aktif ";
 		if (status == false) {
@@ -52,41 +53,45 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 				message + " İş İlanları Listelendi.");
 	}
 
-	@Override
+	@Override // tüm iş ilanları - sıralı
 	public DataResult<List<JobAdvertisement>> getAllSorted() {
 		Sort sort = Sort.by(Direction.ASC, "applicationDeadline");
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(sort),
 				"İş İlanları Listelendi.");
 	}
 
-	@Override
+	@Override // employer'a ait iş ilanları
 	public DataResult<List<JobAdvertisement>> getByEmployer_userId(int userId) {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployer_userId(userId),
 				"Firmanın İş İlanları Listelendi.");
 	}
 
-	@Override
+	@Override // iş ilanı aktif-pasif
 	public Result updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(int jobAdvertisementId,
-			int employerId) {
+			int employerId, boolean status) {
+		String message = "İlan Kapatıldı!";
+		if (status == true) {
+			message = "İlan Aktif Hale Getirildi!";
+		}
 		this.jobAdvertisementDao.updateJobAdvertisementSetJobAdvertisementStatusForEmployer_userId(jobAdvertisementId,
-				employerId);
-		return new SuccessResult("İlan Kapatıldı!");
+				employerId, status);
+		return new SuccessResult(message);
 	}
 
-	@Override
-	public DataResult<List<JobAdvertisement>> getAllActiveSorted() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getAllActiveSorted(),
-				"İş İlanları Listelendi.");
+	@Override // aktif-pasif iş ilanları sıralı
+	public DataResult<List<JobAdvertisement>> getAllSortedJobAdvertisementByStatus(boolean status) {
+		return new SuccessDataResult<List<JobAdvertisement>>(
+				this.jobAdvertisementDao.getAllSortedJobAdvertisementByStatus(status), "İş İlanları Listelendi.");
 	}
 
 	@Override
 	public DataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>> getJobAdvertisementWithEmployerWithJobPositionDetails() {
 		return new SuccessDataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>>(
 				this.jobAdvertisementDao.getJobAdvertisementWithEmployerWithJobPositionDetails(),
-				"İş İlanları Tablo Şekinde Listelendi Listelendi.");
+				"İş İlanları Tablo Şekinde Listelendi.");
 	}
 
-	@Override
+	@Override // Onaylanmış-Onaylanmamış iş ilanları
 	public DataResult<List<JobAdvertisement>> getAllApproveStatus(boolean status) {
 		String message = "Onaylanmış ";
 		if (status == false) {
@@ -96,8 +101,25 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 				message + " İş İlanları Listelendi.");
 	}
 
-	@Override
+	@Override // id'ya göre ilan getirme
 	public DataResult<JobAdvertisement> getByJobAdvertisementId(int id) {
 		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getByJobAdvertisementId(id));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getAllSortedJobAdvertisementByStatusForEmployerId(boolean status,
+			int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>
+		(this.jobAdvertisementDao.getAllSortedJobAdvertisementByStatusForEmployerId(status, employerId), "İş İlanları Listelendi.");
+	}
+
+	@Override//personel onaylama- reddetme
+	public Result updateJobAdvertisementSetApprovalStatus(int jobAdvertisementId, boolean status) {
+		String message = "İlan Onaylandı!";
+		if (status == false) {
+			message = "İlan Reddedildi!";
+		}		
+		this.jobAdvertisementDao.updateJobAdvertisementSetApprovalStatus(jobAdvertisementId, status);
+		return new SuccessResult(message);
 	}
 }

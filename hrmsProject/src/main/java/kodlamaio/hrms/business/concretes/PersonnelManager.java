@@ -32,8 +32,8 @@ public class PersonnelManager implements PersonnelService{
 		return new SuccessResult("Personel Eklendi.");
 	}
 	@Override
-	public Result updateEmployerSetVerificationStatusForUserId(int employerId) {
-		this.employerDao.updateEmployerSetVerificationStatusForUserId(employerId);
+	public Result updateEmployerSetVerificationStatusForUserId(int employerId, boolean status) {
+		this.employerDao.updateEmployerSetVerificationStatusForUserId(employerId,status);
 		return new SuccessResult("İş Veren Onaylandı!");
 	}
 

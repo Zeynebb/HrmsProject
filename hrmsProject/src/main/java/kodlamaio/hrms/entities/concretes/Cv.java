@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,6 +35,9 @@ public class Cv {
 
 	@Column(name = "objective")
 	private String objective;
+	
+	@Column(name ="creation_date")
+	private Date creationDate;
 	
 	@ManyToOne
 	@JoinColumn(name="job_seeker_id")

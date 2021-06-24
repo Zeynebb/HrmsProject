@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CvSocialMediaWithSocialMediaDto {
 	
+	private int socialMediaId;
 	private String socialMediaName;
 	private String link;
 	
