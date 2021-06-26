@@ -13,5 +13,7 @@ public interface JobSeekerService {
 	public DataResult<List<JobSeeker>> getAll();
 	public List<String> getAllEmails();
 	public List<String> getAllNationalityId();
+	
+	public DataResult<JobSeeker>  getJobSeekerByUserId(int userId);
 
 }

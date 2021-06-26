@@ -15,5 +15,6 @@ public interface JobSeekerDao extends JpaRepository<JobSeeker, Integer>{
 	@Query("Select nationalityId From JobSeeker")
 	List<String> getByNationalityId();
 	
+	JobSeeker getJobSeekerByUserId(int userId);
 
 }

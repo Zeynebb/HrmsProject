@@ -12,7 +12,7 @@ public interface CvForeignLanguageDao extends JpaRepository<CvForeignLanguage, I
 	
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.CvForeignLanguageWithForeignLanguageDto(c.cvforeignLanguageId, "
-			+ " f.foreignLanguageName, l.languageLevelName) "
+			+ " f.foreignLanguageId, f.foreignLanguageName,l.languageLevelId, l.languageLevelName) "
 			+ "From CvForeignLanguage c INNER JOIN c.foreignLanguage f INNER JOIN c.languageLevel l "
 			+ " where c.cv.cvId = ?1")
 	List<CvForeignLanguageWithForeignLanguageDto> getCvForeignLanguageWithForeignLanguageDetails(int cvId);

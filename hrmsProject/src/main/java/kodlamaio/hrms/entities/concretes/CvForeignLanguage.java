@@ -1,6 +1,5 @@
 package kodlamaio.hrms.entities.concretes;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +31,7 @@ public class CvForeignLanguage {
 	private LanguageLevel languageLevel;
 	
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="foreign_language_id")
 	private ForeignLanguage foreignLanguage;
 	

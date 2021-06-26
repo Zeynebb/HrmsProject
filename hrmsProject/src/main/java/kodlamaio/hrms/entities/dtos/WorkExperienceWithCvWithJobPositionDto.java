@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.dtos;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WorkExperienceWithCvWithJobPositionDto {
 	
+	private int workExperienceId;
+	private int jobPositionId;
 	private String workplaceName;
-	private String startingDate;
-	private String endingdate;
+	private Date startingDate;
+	private Date endingdate;
 	private String positionName;
 
 }

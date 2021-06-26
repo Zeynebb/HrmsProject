@@ -12,6 +12,8 @@ public interface CvService {
 	
 	public Result add(Cv cv);
 	
+	public Result updateCv(Cv cv, int cvId, int jobSeekerId);
+	
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(int userId);
 	
 	public DataResult<List<CvWithJobSeekerDto>> getCvWithJobSeekerDetails(int cvId);

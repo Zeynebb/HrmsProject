@@ -16,5 +16,8 @@ public interface EducationInformationService {
 	
 	DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>>
 	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(int cvId);
+	
+	DataResult<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>
+	getEducationInformationDetails(int educationId);
 
 }

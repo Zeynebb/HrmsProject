@@ -24,7 +24,7 @@ public class CloudinaryManager {
 	public CloudinaryManager() {
 		valuesMap.put("cloud_name", "yourCloudName");
 		valuesMap.put("api_key", "yourApiKey");
-		valuesMap.put("api_secret", "yourApiSecret");
+		valuesMap.put("api_secret", "YourApiSecret");
 		cloudinary = new Cloudinary(valuesMap);
 
 	}

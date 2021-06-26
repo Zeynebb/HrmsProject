@@ -43,4 +43,10 @@ public class CvManager implements CvService {
 	public DataResult<List<CvWithJobSeekerDto>> getCvWithJobSeekerDetails(int cvId) {
 		return new SuccessDataResult<List<CvWithJobSeekerDto>>(this.cvDao.getCvWithJobSeekerDetails(cvId), "Cv Listelendi");
 	}
+
+	@Override
+	public Result updateCv(Cv cv, int cvId, int jobSeekerId) {
+		cv.setCvId(cvId);
+		return null;
+	}
 }

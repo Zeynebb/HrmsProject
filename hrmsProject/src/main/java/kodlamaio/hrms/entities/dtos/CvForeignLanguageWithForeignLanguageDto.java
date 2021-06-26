@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CvForeignLanguageWithForeignLanguageDto {
 	
-	
 	private int cvForeignLanguageId;
+	private int foreignLanguageId;
 	private String foreignLanguageName;
+	private int languageLevelId;
 	private String languageLevelName;
 	
 	

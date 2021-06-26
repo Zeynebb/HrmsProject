@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CvTechnologyWithTechnologyDto {
 	
+	private int cvTechnologyId;
+	private int technologyId;
 	private String technologyname;	
 
 }

@@ -13,7 +13,7 @@ public interface WorkExperienceDao extends JpaRepository<WorkExperience, Integer
 	
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobPositionDto("
-			+ "w.workplaceName, w.startingDate, w.endingDate, p.positionName) "
+			+ "w.workExperienceId,p.positionId, w.workplaceName, w.startingDate, w.endingDate, p.positionName) "
 			+ "From WorkExperience w Inner Join Cv c ON w.cv.cvId=c.cvId "
 			+ "Inner Join JobPosition p ON w.jobPosition.positionId=p.positionId "
 			+ "where w.cv.cvId=?1 ORDER BY w.endingDate DESC")

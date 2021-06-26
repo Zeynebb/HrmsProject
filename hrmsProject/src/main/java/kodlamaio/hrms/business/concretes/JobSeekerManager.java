@@ -80,4 +80,9 @@ public class JobSeekerManager implements JobSeekerService {
 		return this.jobSeekerDao.getByNationalityId();
 	}
 
+	@Override
+	public DataResult<JobSeeker> getJobSeekerByUserId(int userId) {
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.getJobSeekerByUserId(userId),"İş Arayan Listelendi.");
+	}
+
 }

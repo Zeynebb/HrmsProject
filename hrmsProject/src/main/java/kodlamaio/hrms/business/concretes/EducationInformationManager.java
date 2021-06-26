@@ -16,8 +16,8 @@ import kodlamaio.hrms.entities.dtos.EducationInformationWithCvWithUniversityWith
 @Service
 public class EducationInformationManager implements EducationInformationService {
 
-	private EducationInformationDao educationInformationDao;	
-	
+	private EducationInformationDao educationInformationDao;
+
 	@Autowired
 	public EducationInformationManager(EducationInformationDao educationInformationDao) {
 		super();
@@ -31,7 +31,7 @@ public class EducationInformationManager implements EducationInformationService 
 
 	@Override
 	public Result add(EducationInformation educationInformation) {
-		if(educationInformation.getGraduationDate().isEmpty()) {
+		if (educationInformation.getGraduationDate().isEmpty()) {
 			educationInformation.setGraduationDate("Devam Ediyor");
 		}
 		this.educationInformationDao.save(educationInformation);
@@ -39,10 +39,17 @@ public class EducationInformationManager implements EducationInformationService 
 	}
 
 	@Override
-	public DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>> 
-	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(int cvId) {
+	public DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>> getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(
+			int cvId) {
 		return new SuccessDataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>>(
-				this.educationInformationDao.getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(cvId));
+				this.educationInformationDao
+						.getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(cvId));
+	}
+
+	@Override
+	public DataResult<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto> getEducationInformationDetails(
+			int educationId) {
+		return new SuccessDataResult<>(this.educationInformationDao.getEducationInformationDetails(educationId));
 	}
 
 }

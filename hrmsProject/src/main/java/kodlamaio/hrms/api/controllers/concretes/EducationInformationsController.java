@@ -19,7 +19,7 @@ import kodlamaio.hrms.entities.dtos.EducationInformationWithCvWithUniversityWith
 @RequestMapping("/api/educationInformation")
 @CrossOrigin
 public class EducationInformationsController {
-	
+
 	private EducationInformationService educationInformationService;
 
 	@Autowired
@@ -27,21 +27,28 @@ public class EducationInformationsController {
 		super();
 		this.educationInformationService = educationInformationService;
 	}
+
 	@GetMapping("/getAll")
-	public DataResult<List<EducationInformation>> getAll(){
+	public DataResult<List<EducationInformation>> getAll() {
 		return this.educationInformationService.getAll();
 	}
-	
+
 	@PostMapping("/add")
 	public Result add(@RequestBody EducationInformation educationInformation) {
 		return this.educationInformationService.add(educationInformation);
 	}
-	
+
 	@GetMapping("/getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails")
-	public DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>> 
-	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(@RequestParam int cvId){
-		return this.educationInformationService.getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(cvId);
+	public DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>> getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(
+			@RequestParam int cvId) {
+		return this.educationInformationService
+				.getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(cvId);
 	}
-	
+
+	@GetMapping("/getEducationInformationDetails")
+	public DataResult<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto> getEducationInformationDetails(
+			@RequestParam("educationId") int educationId) {
+		return this.educationInformationService.getEducationInformationDetails(educationId);
+	}
 
 }

@@ -42,6 +42,10 @@ public class JobSeekersController {
 	public DataResult<List<JobSeeker>> getAll() {
 		return this.jobSeekerService.getAll();
 	}
+	@GetMapping("/getJobSeekerByUserId")
+	public DataResult<JobSeeker> getJobSeekerByUserId(int userId){
+		return this.jobSeekerService.getJobSeekerByUserId(userId);
+	}
 
 	@PostMapping("/register")
 	public Result register(@Valid @RequestBody JobSeeker jobSeeker, @RequestParam("passwordAgain") String passwordAgain,

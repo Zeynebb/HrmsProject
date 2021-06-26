@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CvWithJobSeekerDto {
 	
+	private int cvId;
 	private String objective;
 	private String firstName;
 	private String lastName;

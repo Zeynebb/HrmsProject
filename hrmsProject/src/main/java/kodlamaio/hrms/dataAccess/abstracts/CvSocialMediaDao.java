@@ -11,7 +11,7 @@ import kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto;
 public interface CvSocialMediaDao extends JpaRepository<CvSocialMedia, Integer>{
 	
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto(s.socialMediaId "
+	@Query("Select new kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto(c.cvSocialMediaId ,s.socialMediaId "
 			+ ",s.socialMediaName, c.link) "
 			+ "From CvSocialMedia c INNER JOIN c.socialMedia s "
 			+ " where c.cv.cvId = ?1")
