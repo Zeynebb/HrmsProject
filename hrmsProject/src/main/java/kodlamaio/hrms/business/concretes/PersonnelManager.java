@@ -4,7 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.PersonnelService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
+import kodlamaio.hrms.core.utilities.result.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.PersonnelDao;
@@ -35,6 +37,10 @@ public class PersonnelManager implements PersonnelService{
 	public Result updateEmployerSetVerificationStatusForUserId(int employerId, boolean status) {
 		this.employerDao.updateEmployerSetVerificationStatusForUserId(employerId,status);
 		return new SuccessResult("İş Veren Onaylandı!");
+	}
+	@Override
+	public DataResult<Personnel> getByUserId(int userId) {
+		return new SuccessDataResult<Personnel>(this.personnelDao.getByUserId(userId));
 	}
 
 }

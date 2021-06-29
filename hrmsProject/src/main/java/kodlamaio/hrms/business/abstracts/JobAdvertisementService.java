@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
+
 import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
@@ -31,6 +32,8 @@ public interface JobAdvertisementService {
 	
 	public Result updateJobAdvertisementSetApprovalStatus(int jobAdvertisementId, boolean status);
 
-	DataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>> getJobAdvertisementWithEmployerWithJobPositionDetails();
+	public DataResult<List<JobAdvertisementWithEmployerWithJobPositionDto>> getJobAdvertisementWithEmployerWithJobPositionDetails();
+	
+	public DataResult<List<JobAdvertisement>> getAllByPageSize(int pageNo, int pageSize);
 
 }

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kodlamaio.hrms.entities.abstracts.Entities;
@@ -43,6 +45,10 @@ public class JobSeeker extends Users implements Entities {
 	
 	@OneToMany(mappedBy = "jobSeeker")
 	private List<Cv> cvs;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "jobSeeker")
+	private List<Favorite> favorite;
 
 	public JobSeeker(String email, String password, String firstName, String lastName, String nationalityId,
 			int birthYear) {

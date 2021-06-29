@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.PersonnelService;
+import kodlamaio.hrms.core.utilities.result.DataResult;
 import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.entities.concretes.Personnel;
 
@@ -35,6 +36,10 @@ public class PersonnelsController {
 	@PostMapping("/register")
 	public Result register(@RequestBody Personnel personnel) {
 		return this.personnelService.register(personnel);
+	}
+	@GetMapping("/getByUserId")
+	public DataResult<Personnel> getByUserId(int userId){
+		return this.personnelService.getByUserId(userId);
 	}
 
 	@Transactional
