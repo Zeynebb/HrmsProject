@@ -61,7 +61,17 @@ CREATE TABLE public.employers
     website character varying(50) NOT NULL,
     phone_number character varying(11) NOT NULL,
     verification_status boolean NOT NULL,
+    update_employer json,
+    update_status boolean NOT NULL,
     PRIMARY KEY (user_id)
+);
+
+CREATE TABLE public.favorites
+(
+    favorite_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9000000 CACHE 1 ),
+    job_advertisement_id integer NOT NULL,
+    job_seeker_id integer NOT NULL,
+    PRIMARY KEY (favorite_id)
 );
 
 CREATE TABLE public.foreign_languages
@@ -150,6 +160,14 @@ CREATE TABLE public.technologies
     technology_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 23504 CACHE 1 ),
     technology_name character varying(100) NOT NULL,
     PRIMARY KEY (technology_id)
+);
+
+CREATE TABLE public.test
+(
+    test_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    test_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    info json NOT NULL,
+    PRIMARY KEY (test_id)
 );
 
 CREATE TABLE public.universities
@@ -260,6 +278,18 @@ ALTER TABLE public.education_informations
 ALTER TABLE public.employers
     ADD FOREIGN KEY (user_id)
     REFERENCES public.system_users (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.favorites
+    ADD FOREIGN KEY (job_advertisement_id)
+    REFERENCES public.job_advertisements (job_advertisement_id)
+    NOT VALID;
+
+
+ALTER TABLE public.favorites
+    ADD FOREIGN KEY (job_seeker_id)
+    REFERENCES public.job_seekers (user_id)
     NOT VALID;
 
 
