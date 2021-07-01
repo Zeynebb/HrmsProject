@@ -60,8 +60,8 @@ public class PhotoManager implements PhotoService {
 	}
 
 	@Override
-	public DataResult<List<Photo>> getByPhotoForCvId(int cvId) {
-		return new SuccessDataResult<List<Photo>>(this.photoDao.getByPhotoForCvId(cvId), 
+	public DataResult<Photo> getByPhotoForCvId(int cvId) {
+		return new SuccessDataResult<Photo>(this.photoDao.getByPhotoForCvId(cvId), 
 				"Fotoğraf Listelendi.");
 	}
 }

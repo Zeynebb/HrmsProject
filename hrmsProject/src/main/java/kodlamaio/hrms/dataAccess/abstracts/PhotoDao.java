@@ -18,7 +18,7 @@ public interface PhotoDao extends JpaRepository<Photo, Integer>{
 	List<Integer> getAllCvId();
 	
 	@Query("From Photo p where p.cv.cvId=?1")
-	List<Photo> getByPhotoForCvId(int cvId);
+	Photo getByPhotoForCvId(int cvId);
 	
 
 }

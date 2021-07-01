@@ -1,6 +1,8 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +48,10 @@ public class EmployersController {
 	public Result login( @RequestParam("email") String email, @RequestParam("password") String password) {
 		return this.employerService.login(email,password);
 	}
+	@PostMapping("/update")
+	public ResponseEntity<?> update(@Valid @RequestBody Employer employer) {
+		return ResponseEntity.ok(this.employerService.update(employer));
+	}
 	
 	@GetMapping("/getByEmployerUserId")
 	public DataResult<Employer> getByUserId(int userId){
@@ -56,6 +62,18 @@ public class EmployersController {
 	public DataResult<List<Employer>> getAllEmployerByVerificationStatus(boolean status) {
 		return this.employerService.getAllEmployerByVerificationStatus(status);
 	}	
+	@GetMapping("/getUpdateByUserId")
+	public DataResult<Map<String, Object>> getUpdateByUserId(int userId){
+		return this.employerService.getUpdateByUserId(userId);
+	}
+	@PostMapping("/updatedEmployerVerification")
+	public Result updatedEmployerVerification(int employerId) {
+		return this.employerService.updatedEmployerVerification(employerId);
+	}
+	@GetMapping("/getAllUpdatedEmployer")
+	public DataResult<List<Employer>> getAllUpdatedEmployer() {
+		return this.employerService.getAllUpdatedEmployer();
+	}
 
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@Valid @RequestBody Employer employer,

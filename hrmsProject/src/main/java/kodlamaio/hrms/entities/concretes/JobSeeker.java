@@ -51,12 +51,16 @@ public class JobSeeker extends Users implements Entities {
 	private List<Favorite> favorite;
 
 	public JobSeeker(String email, String password, String firstName, String lastName, String nationalityId,
-			int birthYear) {
+			int birthYear, List<Cv> cvs, List<Favorite> favorite) {
 		super(email, password);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nationalityId = nationalityId;
 		this.birthYear = birthYear;
+		this.cvs = cvs;
+		this.favorite = favorite;
 	}
+
+	
 
 }

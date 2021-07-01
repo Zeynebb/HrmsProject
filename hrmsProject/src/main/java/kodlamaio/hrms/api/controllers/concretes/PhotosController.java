@@ -39,7 +39,7 @@ public class PhotosController {
 		return this.photoService.getAll();
 	}
 	@GetMapping("/getByPhotoForCvId")
-	public DataResult<List<Photo>> getByPhotoForCvId(@RequestParam int cvId){
+	public DataResult<Photo> getByPhotoForCvId(@RequestParam int cvId){
 		return this.photoService.getByPhotoForCvId(cvId);
 	}
 	

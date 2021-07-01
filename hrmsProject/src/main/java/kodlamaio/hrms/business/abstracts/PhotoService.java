@@ -19,7 +19,7 @@ public interface PhotoService {
 	
 	public Result delete(String id) throws IOException;
 	
-	public DataResult<List<Photo>> getByPhotoForCvId(int cvId);
+	public DataResult<Photo> getByPhotoForCvId(int cvId);
 	
 
 }

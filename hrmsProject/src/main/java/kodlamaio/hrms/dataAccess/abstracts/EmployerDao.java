@@ -2,6 +2,7 @@
 package kodlamaio.hrms.dataAccess.abstracts;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,5 +19,9 @@ public interface EmployerDao extends JpaRepository<Employer, Integer>{
 	
 	List<Employer> getAllEmployerByVerificationStatus(boolean status);
 	
+	@Query("Select e.update From Employer e where e.userId=?1")
+	Map<String, Object> getUpdateByUserId(int userId);
+		
+	List<Employer> findByUpdateNotNull();
 
 }
