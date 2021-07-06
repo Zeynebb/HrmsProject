@@ -15,5 +15,4 @@ public interface UserDao extends JpaRepository<Users, Integer> {
 	@Query("update Users set password=?2 "
 			+ "where userId=?1")
 	int updateUserSetPassword(int userId, String password);
-	
 }

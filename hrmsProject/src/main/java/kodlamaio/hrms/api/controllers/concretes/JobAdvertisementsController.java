@@ -101,5 +101,9 @@ public class JobAdvertisementsController {
 			@RequestParam("pageSize") int pageSize) {
 		return this.jobAdvertisementService.getAllByPageSize(pageNo, pageSize);
 	}
+	@GetMapping("/getByAdvertisementStatusAndApprovalStatus")
+	public DataResult<List<JobAdvertisement>> getByAdvertisementStatusAndApprovalStatus(){
+		return this.jobAdvertisementService.getByAdvertisementStatusAndApprovalStatus();
+	}
 
 }

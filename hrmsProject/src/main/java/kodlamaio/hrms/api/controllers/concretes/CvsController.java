@@ -1,6 +1,9 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,5 +48,10 @@ public class CvsController {
 	@GetMapping("/getByCvIdForJobSeeker_UserId")
 	public DataResult<List<Cv>> getByCvIdForJobSeeker_UserId(@RequestParam int userId) {
 		return this.cvService.getByCvIdForJobSeeker_UserId(userId);
+	}
+	@Transactional
+	@PostMapping("/updateCvSetCreationDate")
+	public Result updateCvSetCreationDate(@RequestParam("cvId") int cvId) {
+		return this.cvService.updateCvSetCreationDate(cvId);
 	}
 }

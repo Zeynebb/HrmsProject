@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,12 @@ public class CvManager implements CvService {
 	public Result updateCv(Cv cv, int cvId, int jobSeekerId) {
 		cv.setCvId(cvId);
 		return null;
+	}
+
+	@Override
+	public Result updateCvSetCreationDate(int cvId) {
+		Date date = new Date(System.currentTimeMillis());
+		this.cvDao.updateCvSetCreationDate(cvId, date);
+		return new SuccessResult("Oluşturulma Tarihi Güncellendi");
 	}
 }

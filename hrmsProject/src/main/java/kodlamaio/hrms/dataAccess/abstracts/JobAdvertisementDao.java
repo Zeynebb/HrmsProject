@@ -24,6 +24,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	JobAdvertisement getByJobAdvertisementIdAndEmployer_userId(int jobAdvertisementId, int userId);
 
 	List<JobAdvertisement> getByEmployer_userId(int userId);
+	
+	List<JobAdvertisement> getByAdvertisementStatusAndApprovalStatus(boolean advertisementStatus, boolean approvalStatus);
 
 	@Modifying
 	@Query("update JobAdvertisement set advertisementStatus=?3 "

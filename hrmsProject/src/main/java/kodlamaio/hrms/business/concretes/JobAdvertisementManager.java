@@ -111,23 +111,31 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	@Override
 	public DataResult<List<JobAdvertisement>> getAllSortedJobAdvertisementByStatusForEmployerId(boolean status,
 			int employerId) {
-		return new SuccessDataResult<List<JobAdvertisement>>
-		(this.jobAdvertisementDao.getAllSortedJobAdvertisementByStatusForEmployerId(status, employerId), "İş İlanları Listelendi.");
+		return new SuccessDataResult<List<JobAdvertisement>>(
+				this.jobAdvertisementDao.getAllSortedJobAdvertisementByStatusForEmployerId(status, employerId),
+				"İş İlanları Listelendi.");
 	}
 
-	@Override//personel onaylama- reddetme
+	@Override // personel onaylama- reddetme
 	public Result updateJobAdvertisementSetApprovalStatus(int jobAdvertisementId, boolean status) {
 		String message = "İlan Onaylandı!";
 		if (status == false) {
 			message = "İlan Reddedildi!";
-		}		
+		}
 		this.jobAdvertisementDao.updateJobAdvertisementSetApprovalStatus(jobAdvertisementId, status);
 		return new SuccessResult(message);
 	}
+
 	@Override
 	public DataResult<List<JobAdvertisement>> getAllByPageSize(int pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(pageable).getContent());
 	}
-	
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByAdvertisementStatusAndApprovalStatus() {
+		return new SuccessDataResult<List<JobAdvertisement>>(
+				this.jobAdvertisementDao.getByAdvertisementStatusAndApprovalStatus(true, true),"Yayında olan ilanlar listelendi");
+	}
+
 }
