@@ -43,4 +43,10 @@ public class CvForeignLanguageManager implements CvForeignLanguageService {
 				"Yabancı Dil Bilgileri Listelendi.");
 	}
 
+	@Override
+	public Result deleteByForeignLanguageId(int cvForeignLanguageId) {
+		this.cvForeignLanguageDao.deleteByCvForeignLanguageId(cvForeignLanguageId);
+		return new SuccessResult("Yabancı Dil Bilgisi Silindi.");
+	}
+
 }

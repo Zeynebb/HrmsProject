@@ -41,4 +41,10 @@ public class CvTechnologyManager implements CvTechnologyService{
 		return new SuccessDataResult<List<CvTechnologyWithTechnologyDto>>(this.cvTechnologyDao.getCvTechnologyWithTechnologydetails(cvId),"Teknolojiler Listelendi");
 	}
 
+	@Override
+	public Result deleteByCvTechnologiesId(int cvTechnologiesId) {
+		this.cvTechnologyDao.deleteByCvTechnologiesId(cvTechnologiesId);
+		return new SuccessResult("Programlama dili silindi.");
+	}
+
 }

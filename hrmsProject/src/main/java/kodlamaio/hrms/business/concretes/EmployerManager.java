@@ -1,6 +1,5 @@
 package kodlamaio.hrms.business.concretes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Objects;
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.business.abstracts.ValidationCodeService;
 import kodlamaio.hrms.core.abstracts.EmailDomainCheckService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.utilities.result.DataResult;
@@ -28,18 +28,21 @@ public class EmployerManager implements EmployerService {
 	private EmailSendService emailSendService;
 	private EmailDomainCheckService emailDomainChekService;
 	private UserDao userDao;
-	private List<String> emails = new ArrayList<>();
 	private ObjectMapper objectMapper;
+	private ValidationCodeService validationCodeService;
+	private long code;
 
 	@Autowired
 	public EmployerManager(EmployerDao employerDao, EmailSendService emailSendService,
-			EmailDomainCheckService emailDomainChekService, UserDao userDao, ObjectMapper objectMapper) {
+			EmailDomainCheckService emailDomainChekService, UserDao userDao, ObjectMapper objectMapper,
+			ValidationCodeService validationCodeService) {
 		super();
 		this.employerDao = employerDao;
 		this.emailSendService = emailSendService;
 		this.emailDomainChekService = emailDomainChekService;
 		this.userDao = userDao;
 		this.objectMapper = objectMapper;
+		this.validationCodeService = validationCodeService;
 	}
 
 	@Override
@@ -48,14 +51,25 @@ public class EmployerManager implements EmployerService {
 	}
 
 	@Override
-	public Result register(Employer employer, String passwordAgain) {
+	public Result register(Employer employer, String passwordAgain, long validationCode) {
 		Result result = new ErrorResult("Kayıt Başarısız!");
-		if (emailIsItUsed(employer.getEmail()) && Objects.equal(passwordAgain, employer.getPassword())
-				&& emailDomainChekService.domainCheck(employer.getEmail(), employer.getWebsite())) {
-			emailSendService.emailSend(employer.getEmail());
-			employer.setVerificationStatus(false);// default
-			this.employerDao.save(employer);
-			result = new SuccessResult("Kayıt Başarılı");
+		if (code == validationCode) {
+			if (Objects.equal(passwordAgain, employer.getPassword())) {
+				employer.setVerificationStatus(false);// default
+				this.employerDao.save(employer);
+				result = new SuccessResult("Kayıt Başarılı");
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Result emailSending(String email, String website) throws Exception {
+		Result result = new ErrorResult("Email Gönderilemedi!");
+		code = validationCodeService.codeCreate();
+		if (emailDomainChekService.domainCheck(email, website) && emailIsItUsed(email)) {
+			emailSendService.sendEmail(email, code);
+			result = new SuccessResult("Email Gönderildi");
 		}
 		return result;
 	}
@@ -78,6 +92,7 @@ public class EmployerManager implements EmployerService {
 		return result;
 	}
 
+	@Override
 	public boolean emailIsItUsed(String email) {
 		boolean result = true;
 		if (getAllEmails().contains(email)) {
@@ -88,10 +103,7 @@ public class EmployerManager implements EmployerService {
 
 	@Override
 	public List<String> getAllEmails() {
-		for (int i = 0; i < getAll().size(); i++) {
-			emails.add(getAll().get(i).getEmail());
-		}
-		return emails;
+		return this.userDao.getAllEmails();
 	}
 
 	@Override
@@ -136,7 +148,8 @@ public class EmployerManager implements EmployerService {
 
 	@Override
 	public DataResult<List<Employer>> getAllUpdatedEmployer() {
-		return new SuccessDataResult<List<Employer>>(this.employerDao.findByUpdateNotNull(), "Güncellenmiş iş verenler listelendi");
+		return new SuccessDataResult<List<Employer>>(this.employerDao.findByUpdateNotNull(),
+				"Güncellenmiş iş verenler listelendi");
 	}
 
 }

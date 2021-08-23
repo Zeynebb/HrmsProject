@@ -13,6 +13,7 @@ public interface EducationInformationService {
 	
 	public Result add(EducationInformation educationInformation);
 	
+	public Result deleteByEducationInformationId(int educationId);
 	
 	DataResult<List<EducationInformationWithCvWithUniversityWithUniversityDepartmentDto>>
 	getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails(int cvId);

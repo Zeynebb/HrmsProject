@@ -33,13 +33,19 @@ public class CvSocialMediaManager implements CvSocialMediaService {
 	@Override
 	public Result add(CvSocialMedia cvSocialMedia) {
 		this.cvSocialMediaDao.save(cvSocialMedia);
-		return new SuccessResult("Sosyal meyda bilgileri eklendi.");
+		return new SuccessResult("Sosyal medya bilgisi eklendi.");
 	}
 
 	@Override
 	public DataResult<List<CvSocialMediaWithSocialMediaDto>> getCvSocialMediaWithSocialMediaDetails(int cvId) {
 		return new SuccessDataResult<List<CvSocialMediaWithSocialMediaDto>>(this.cvSocialMediaDao.getCvSocialMediaWithSocialMediaDetails(cvId),
 				"Sosyal Medyalar Listelendi");
+	}
+
+	@Override
+	public Result deleteByCvSocialMediaId(int cvSocialMediaId) {
+		this.cvSocialMediaDao.deleteByCvSocialMediaId(cvSocialMediaId);
+		return new SuccessResult("Sosyal medya bilgisi silindi.");
 	}
 
 }

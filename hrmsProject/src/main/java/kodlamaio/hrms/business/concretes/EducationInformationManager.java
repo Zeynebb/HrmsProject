@@ -52,4 +52,10 @@ public class EducationInformationManager implements EducationInformationService 
 		return new SuccessDataResult<>(this.educationInformationDao.getEducationInformationDetails(educationId));
 	}
 
+	@Override
+	public Result deleteByEducationInformationId(int educationId) {
+		this.educationInformationDao.deleteByEducationInformationId(educationId);
+		return new SuccessResult("Eğitim Bilsisi Silindi");
+	}
+
 }

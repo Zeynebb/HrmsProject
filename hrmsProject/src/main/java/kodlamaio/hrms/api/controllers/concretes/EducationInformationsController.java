@@ -1,6 +1,9 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +39,11 @@ public class EducationInformationsController {
 	@PostMapping("/add")
 	public Result add(@RequestBody EducationInformation educationInformation) {
 		return this.educationInformationService.add(educationInformation);
+	}
+	@Transactional
+	@PostMapping("/deleteEducation")
+	public Result deleteByEducationInformationId(int educationId) {
+		return this.educationInformationService.deleteByEducationInformationId(educationId);
 	}
 
 	@GetMapping("/getEducationInformationWithCvWithUniversityWithUniversityDepartmentDetails")

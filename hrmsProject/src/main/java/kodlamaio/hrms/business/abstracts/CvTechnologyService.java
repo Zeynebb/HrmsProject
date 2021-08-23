@@ -13,6 +13,8 @@ public interface CvTechnologyService {
 	
 	public Result add(CvTechnology cvTechnology);
 	
+	public Result deleteByCvTechnologiesId(int cvTechnologiesId);
+	
 	public DataResult<List<CvTechnologyWithTechnologyDto>> getCvTechnologyWithTechnologydetails(int cvId);
 
 }

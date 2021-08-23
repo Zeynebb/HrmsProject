@@ -2,6 +2,8 @@ package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,11 @@ public class CvTechnologiesController {
 	@PostMapping("/add")
 	public Result add(@RequestBody CvTechnology cvTechnology) {
 		return this.cvTechnologyService.add(cvTechnology);
+	}
+	@Transactional
+	@PostMapping("/deleteCvTechnology")
+	public Result deleteByCvTechnologiesId(int cvTechnologiesId) {
+		return this.cvTechnologyService.deleteByCvTechnologiesId(cvTechnologiesId);
 	}
 	
 	@GetMapping("/getCvTechnologyWithTechnologydetails")

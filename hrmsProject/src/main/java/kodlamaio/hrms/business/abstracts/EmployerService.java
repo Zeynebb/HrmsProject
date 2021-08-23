@@ -9,11 +9,15 @@ import kodlamaio.hrms.entities.concretes.Employer;
 
 public interface EmployerService {
 	
-	public Result register(Employer employer, String passwordAgain);
+	public Result register(Employer employer, String passwordAgain , long validationCode);
 	
 	public Result login( String email, String password);
 	
 	public Result update(Employer employer);
+	
+	public Result emailSending(String email, String website) throws Exception ;
+	
+	public boolean emailIsItUsed(String email);
 	
 	public DataResult<Employer>  getByUserId(int userId);
 	

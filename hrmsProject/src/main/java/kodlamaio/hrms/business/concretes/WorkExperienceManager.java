@@ -51,4 +51,10 @@ public class WorkExperienceManager implements WorkExperienceService {
 				"İş Tecrübeleri Listelendi");
 	}
 
+	@Override
+	public Result deleteByWorkExperienceId(int workExperienceId) {
+		this.workExperienceDao.deleteByWorkExperienceId(workExperienceId);
+		return new SuccessResult("İş tecrübesi silindi.");
+	}
+
 }

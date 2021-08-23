@@ -10,38 +10,33 @@ import kodlamaio.hrms.core.utilities.result.Result;
 import kodlamaio.hrms.core.utilities.result.SuccessResult;
 import kodlamaio.hrms.emailService.EmailSendManager;
 import kodlamaio.hrms.entities.concretes.Email;
-import kodlamaio.hrms.validationCodeService.ValidationCodeManager;
 
 @Service
 public class EmailSendManagerAdapter implements EmailSendService {
 
 	private EmailSendManager emailSendManager;
-	private ValidationCodeManager validationCodeManager;
 	private static Logger log = LoggerFactory.getLogger(EmailSendManagerAdapter.class);
 
 	@Autowired
-	public EmailSendManagerAdapter(EmailSendManager emailSendManager, ValidationCodeManager validationCodeManager) {
+	public EmailSendManagerAdapter(EmailSendManager emailSendManager) {
 		this.emailSendManager = emailSendManager;
-		this.validationCodeManager = validationCodeManager;
 	}
 
 	@Override
-	public void emailSend(String email) {
+	public void fakeEmailSend(String email, long verificationCode) {
 		emailSendManager.emailSending(email);
 
 	}
 
 	@Override
-	public Result run(String email) throws Exception {
-		long code = this.validationCodeManager.createCode();
-
+	public Result sendEmail(String email, long verificationCode) throws Exception {
 		log.info("HRMS - Doğrulama Kodu Gönderildi");
 
 		Email mail = new Email();
 		mail.setFrom("HRMS");
 		mail.setTo(email);
 		mail.setSubject("HRMS - Doğrulama Kodu");
-		mail.setContent("Merhaba, \n\n Hesabınzı doğrulamanız için gereken doğrulama kodu: "+code);
+		mail.setContent("Merhaba, \n\n Hesabınzı doğrulamanız için gereken doğrulama kodu: " + verificationCode);
 
 		emailSendManager.sendSimpleMessage(mail);
 		return new SuccessResult("Email Gönderildi");

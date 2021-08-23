@@ -13,6 +13,8 @@ public interface CvSocialMediaService {
 	
 	public Result add(CvSocialMedia cvSocialMedia);
 	
+	public Result deleteByCvSocialMediaId(int cvSocialMediaId);
+	
 	public DataResult<List<CvSocialMediaWithSocialMediaDto>> getCvSocialMediaWithSocialMediaDetails(int cvId);
 
 }

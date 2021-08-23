@@ -14,6 +14,8 @@ public interface WorkExperienceService {
 	
 	public Result add(WorkExperience workExperience);
 	
+	public Result deleteByWorkExperienceId(int workExperienceId);
+	
 	DataResult<List<WorkExperienceWithCvWithJobSeekerDto>> getWorkExperienceWithCvWithJobSeekerDateils(int userId);
 	
 	DataResult<List<WorkExperienceWithCvWithJobPositionDto>> getWorkExperienceWithCvWithJobPositionDetails(int cvId);

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.common.base.Objects;
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
+import kodlamaio.hrms.business.abstracts.ValidationCodeService;
 import kodlamaio.hrms.core.abstracts.EmailCheckService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.abstracts.MernisCheckService;
@@ -23,15 +24,19 @@ public class JobSeekerManager implements JobSeekerService {
 	private JobSeekerDao jobSeekerDao;
 	private EmailSendService emailSendService;
 	private MernisCheckService mernisCheckService;
+	private ValidationCodeService validationCodeService;
+	private long code;
 
 	@Autowired
 	public JobSeekerManager(EmailCheckService emailCheckService, JobSeekerDao jobSeekerDao,
-			EmailSendService emailSendService, MernisCheckService mernisCheckService) {
+			EmailSendService emailSendService, MernisCheckService mernisCheckService,
+			ValidationCodeService validationCodeService) {
 		super();
 		this.emailCheckService = emailCheckService;
 		this.jobSeekerDao = jobSeekerDao;
 		this.emailSendService = emailSendService;
 		this.mernisCheckService = mernisCheckService;
+		this.validationCodeService = validationCodeService;
 	}
 
 	@Override
@@ -41,14 +46,33 @@ public class JobSeekerManager implements JobSeekerService {
 				&& nationalityIdIsItUsed(jobSeeker.getNationalityId())
 				&& mernisCheckService.checkIfRealPerson(jobSeeker)
 				&& Objects.equal(passwordAgain, jobSeeker.getPassword())) {
-			//validationCode kontrolü eklenecek 
-			emailSendService.emailSend(jobSeeker.getEmail());
 			this.jobSeekerDao.save(jobSeeker);
 			result = new SuccessResult("Kayıt Başarılı.");
 		}
 		return result;
 	}
 
+	@Override
+	public Result emailVerification(JobSeeker jobSeeker, String passwordAgain, long validationCode) throws Exception {
+		Result result = new ErrorResult("Doğrulama Başarısız!");
+		if (code == validationCode) {
+			register(jobSeeker, passwordAgain, validationCode);
+			result = new SuccessResult("Doğrulama Başarılı!");
+		}
+		return result;
+	}
+
+	@Override
+	public Result emailSending(String email) throws Exception  {
+		Result result = new ErrorResult("Email Gönderilemedi!");
+		code = validationCodeService.codeCreate();
+		if (emailCheckService.emailCheck(email) && emailIsItUsed(email)) {
+			emailSendService.sendEmail(email, code);
+			result =new SuccessResult("Email Gönderildi");
+		}		
+		return result;
+	}
+	@Override
 	public boolean emailIsItUsed(String email) {
 		boolean result = true;
 		if (getAllEmails().contains(email)) {
@@ -56,7 +80,7 @@ public class JobSeekerManager implements JobSeekerService {
 		}
 		return result;
 	}
-
+	@Override
 	public boolean nationalityIdIsItUsed(String nationalityId) {
 		boolean result = true;
 		if (getAllNationalityId().contains(nationalityId)) {
@@ -82,7 +106,8 @@ public class JobSeekerManager implements JobSeekerService {
 
 	@Override
 	public DataResult<JobSeeker> getJobSeekerByUserId(int userId) {
-		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.getJobSeekerByUserId(userId),"İş Arayan Listelendi.");
+		return new SuccessDataResult<JobSeeker>(this.jobSeekerDao.getJobSeekerByUserId(userId),
+				"İş Arayan Listelendi.");
 	}
 
 }

@@ -2,6 +2,8 @@ package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,12 @@ public class WorkExperiencesController {
 	public Result add(@RequestBody WorkExperience workExperience) {
 		return this.workExperienceService.add(workExperience);
 	}
+	@Transactional
+	@PostMapping("/deleteByWorkExperienceId")
+	public Result deleteByWorkExperienceId(int workExperienceId) {
+		return this.workExperienceService.deleteByWorkExperienceId(workExperienceId);
+	}
+	
 	@GetMapping("/getWorkExperienceWithCvWithJobPositionDetails")
 	public DataResult<List<WorkExperienceWithCvWithJobPositionDto>> getWorkExperienceWithCvWithJobPositionDetails(
 			@RequestParam int cvId){

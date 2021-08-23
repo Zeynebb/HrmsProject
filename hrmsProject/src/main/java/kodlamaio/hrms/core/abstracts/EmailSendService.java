@@ -4,8 +4,8 @@ import kodlamaio.hrms.core.utilities.result.Result;
 
 public interface EmailSendService {
 	
-	public void emailSend(String email);
+	public void fakeEmailSend(String email, long verificationCode);
 	
-	public Result run( String email) throws Exception;
+	public Result sendEmail( String email, long verificationCode) throws Exception;
 
 }

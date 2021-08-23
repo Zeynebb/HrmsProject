@@ -11,6 +11,9 @@ import kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobSeekerDto;
 
 public interface WorkExperienceDao extends JpaRepository<WorkExperience, Integer>{
 	
+	Long deleteByCv_CvId(int cvId);
+	
+	Long deleteByWorkExperienceId(int workExperienceId);
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.WorkExperienceWithCvWithJobPositionDto("
 			+ "w.workExperienceId,p.positionId, w.workplaceName, w.startingDate, w.endingDate, p.positionName) "

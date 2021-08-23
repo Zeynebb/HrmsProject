@@ -10,6 +10,8 @@ import kodlamaio.hrms.entities.dtos.CvForeignLanguageWithForeignLanguageDto;
 public interface CvForeignLanguageService {
 	
 	public DataResult<List<CvForeignLanguage>> getAll();
+	
+	public Result deleteByForeignLanguageId(int cvForeignLanguageId);
 		
 	public Result add(CvForeignLanguage cvForeignLanguage);
 

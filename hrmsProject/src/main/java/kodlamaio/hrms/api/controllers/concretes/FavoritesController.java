@@ -61,7 +61,7 @@ public class FavoritesController {
 		return this.favoriteService.existsByJobAdvertisement_JobAdvertisementId(jobAdvertisementId);
 	}
 
-	@GetMapping("/getFavoriteByJobSeekerId")
+	@GetMapping("/getFavoriteIdByJobSeekerId")
 	public DataResult<List<Integer>> getFavoriteByJobSeekerId(@RequestParam int userId) {
 		return this.favoriteService.getFavoriteByJobSeekerId(userId);
 	}

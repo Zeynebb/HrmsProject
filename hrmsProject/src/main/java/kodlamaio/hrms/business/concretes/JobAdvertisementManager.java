@@ -129,13 +129,15 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	@Override
 	public DataResult<List<JobAdvertisement>> getAllByPageSize(int pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(pageable).getContent());
+		return new SuccessDataResult<List<JobAdvertisement>>(
+				this.jobAdvertisementDao.findAllByAdvertisementStatusAndApprovalStatus(true,true,pageable));
 	}
 
 	@Override
 	public DataResult<List<JobAdvertisement>> getByAdvertisementStatusAndApprovalStatus() {
 		return new SuccessDataResult<List<JobAdvertisement>>(
-				this.jobAdvertisementDao.getByAdvertisementStatusAndApprovalStatus(true, true),"Yayında olan ilanlar listelendi");
+				this.jobAdvertisementDao.getByAdvertisementStatusAndApprovalStatus(true, true),
+				"Yayında olan ilanlar listelendi");
 	}
 
 }

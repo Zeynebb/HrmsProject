@@ -2,6 +2,8 @@ package kodlamaio.hrms.api.controllers.concretes;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,11 @@ public class CvForeignLanguagesController {
 	@PostMapping("/add")
 	public Result add(@RequestBody CvForeignLanguage cvForeignLanguage) {
 		return this.cvForeignLanguageService.add(cvForeignLanguage);
+	}
+	@Transactional
+	@PostMapping("/deleteCvForeignLanguage")
+	public Result deleteByForeignLanguageId(int foreignLanguageId) {
+		return this.cvForeignLanguageService.deleteByForeignLanguageId(foreignLanguageId);
 	}
 		
 	@GetMapping("/getCvForeignLanguageWithForeignLanguageDetails")

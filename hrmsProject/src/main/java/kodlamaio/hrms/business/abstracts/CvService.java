@@ -12,6 +12,10 @@ public interface CvService {
 	
 	public Result add(Cv cv);
 	
+	public Result delete(int cvId);
+	
+	public Result deleteCvSetObjective(int cvId);
+	
 	public Result updateCv(Cv cv, int cvId, int jobSeekerId);
 	
 	public Result updateCvSetCreationDate(int cvId);

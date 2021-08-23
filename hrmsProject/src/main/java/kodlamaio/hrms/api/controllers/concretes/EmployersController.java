@@ -43,33 +43,37 @@ public class EmployersController {
 	public List<Employer> getAll() {
 		return this.employerService.getAll();
 	}
-	
+
 	@PostMapping("/login")
-	public Result login( @RequestParam("email") String email, @RequestParam("password") String password) {
-		return this.employerService.login(email,password);
+	public Result login(@RequestParam("email") String email, @RequestParam("password") String password) {
+		return this.employerService.login(email, password);
 	}
+
 	@PostMapping("/update")
 	public ResponseEntity<?> update(@Valid @RequestBody Employer employer) {
 		return ResponseEntity.ok(this.employerService.update(employer));
 	}
-	
+
 	@GetMapping("/getByEmployerUserId")
-	public DataResult<Employer> getByUserId(int userId){
+	public DataResult<Employer> getByUserId(int userId) {
 		return this.employerService.getByUserId(userId);
 	}
-	
+
 	@GetMapping("/getAllEmployerByVerificationStatus")
 	public DataResult<List<Employer>> getAllEmployerByVerificationStatus(boolean status) {
 		return this.employerService.getAllEmployerByVerificationStatus(status);
-	}	
+	}
+
 	@GetMapping("/getUpdateByUserId")
-	public DataResult<Map<String, Object>> getUpdateByUserId(int userId){
+	public DataResult<Map<String, Object>> getUpdateByUserId(int userId) {
 		return this.employerService.getUpdateByUserId(userId);
 	}
+
 	@PostMapping("/updatedEmployerVerification")
 	public Result updatedEmployerVerification(int employerId) {
 		return this.employerService.updatedEmployerVerification(employerId);
 	}
+
 	@GetMapping("/getAllUpdatedEmployer")
 	public DataResult<List<Employer>> getAllUpdatedEmployer() {
 		return this.employerService.getAllUpdatedEmployer();
@@ -77,8 +81,16 @@ public class EmployersController {
 
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@Valid @RequestBody Employer employer,
-			@RequestParam("passwordAgain") String passwordAgain) {
-		return ResponseEntity.ok(this.employerService.register(employer, passwordAgain));
+			@RequestParam("passwordAgain") String passwordAgain, @RequestParam("validationCode") long validationCode) {
+		return ResponseEntity.ok(this.employerService.register(employer, passwordAgain, validationCode));
+	}
+	@PostMapping("/emailSending")
+	public Result emailSending(String email, String website) throws Exception{
+		return this.employerService.emailSending(email, website);
+	}
+	@GetMapping("/emailIsItUsed")
+	public boolean emailIsItUsed(String email) {
+		return this.employerService.emailIsItUsed(email);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

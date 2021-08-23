@@ -1,6 +1,8 @@
 package kodlamaio.hrms.api.controllers.concretes;
 
-import java.util.List;
+ import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,6 +39,12 @@ public class CvSocialMediaController {
 	@PostMapping("/add")
 	public Result add(@RequestBody CvSocialMedia cvSocialMedia) {
 		return this.cvSocialMediaService.add(cvSocialMedia);
+	}
+	
+	@Transactional
+	@PostMapping("/deleteByCvSocialMediaId")
+	public Result deleteByCvSocialMediaId(int cvSocialMediaId) {
+		return this.cvSocialMediaService.deleteByCvSocialMediaId(cvSocialMediaId);
 	}
 	
 	@GetMapping("/getCvSocialMediaWithSocialMediaDetails")

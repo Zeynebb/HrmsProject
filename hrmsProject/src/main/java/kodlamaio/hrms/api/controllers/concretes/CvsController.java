@@ -39,6 +39,17 @@ public class CvsController {
 	public Result add(@RequestBody Cv cv) {
 		return this.cvService.add(cv);
 	}
+	@Transactional
+	@PostMapping("/delete")
+	public Result deleteByCvId(int cvId) {
+		return this.cvService.delete(cvId);
+	}
+	
+	@Transactional
+	@PostMapping("/deleteObjective")
+	public Result deleteCvSetObjective(int cvId) {
+		return this.cvService.deleteCvSetObjective(cvId);
+	}
 	
 	@GetMapping("/getCvWithJobSeekerDetails")
 	public DataResult<List<CvWithJobSeekerDto>> getCvWithJobSeekerDetails(int cvId){

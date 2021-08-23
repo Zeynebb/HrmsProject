@@ -33,6 +33,10 @@ public class UsersController {
 	public DataResult<List<Users>> getAll(){
 		return this.userService.getAll();
 	}
+	@GetMapping("/getAllEmails")
+	public DataResult<List<String>> getAllEmail(){
+		return this.userService.getAllEmail();
+	}
 
 	@Transactional
 	@PostMapping("/updatePassword")

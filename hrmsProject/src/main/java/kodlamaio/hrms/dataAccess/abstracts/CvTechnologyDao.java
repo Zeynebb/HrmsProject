@@ -10,6 +10,10 @@ import kodlamaio.hrms.entities.dtos.CvTechnologyWithTechnologyDto;
 
 public interface CvTechnologyDao extends JpaRepository<CvTechnology, Integer>{
 	
+	Long deleteByCv_CvId(int cvId);
+	
+	Long deleteByCvTechnologiesId(int cvTechnologiesId);
+	
 	@Query("Select new kodlamaio.hrms.entities.dtos.CvTechnologyWithTechnologyDto(c.cvTechnologiesId, t.technologyId,t.technologyName) "
 			+ "From CvTechnology c INNER JOIN c.technology t "
 			+ " where c.cv.cvId = ?1")

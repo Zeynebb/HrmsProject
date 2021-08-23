@@ -9,6 +9,7 @@ import kodlamaio.hrms.entities.concretes.Photo;
 
 public interface PhotoDao extends JpaRepository<Photo, Integer>{
 	
+	Long deleteByCv_CvId(int cvId);
 	
 	@Modifying
 	@Query("update Photo set photoUrl=:url where cv.cvId=:cvId")

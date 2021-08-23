@@ -42,4 +42,9 @@ public class UserManager implements UserService {
 		return result;
 	}
 
+	@Override
+	public DataResult<List<String>> getAllEmail() {
+		return new SuccessDataResult<List<String>>(this.userDao.getAllEmails(), "Emailler listelendi");
+	}
+
 }

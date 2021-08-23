@@ -10,6 +10,10 @@ import kodlamaio.hrms.entities.dtos.EducationInformationWithCvWithUniversityWith
 
 public interface EducationInformationDao extends JpaRepository<EducationInformation, Integer> {
 	
+	Long deleteByEducationInformationId(int educationId);
+	
+	Long deleteByCv_CvId(int cvId);
+	
 	@Query("Select new kodlamaio.hrms.entities.dtos.EducationInformationWithCvWithUniversityWithUniversityDepartmentDto("
 			+ "e.educationInformationId, c.cvId, u.universityId, "
 			+ "u.universityName, d.universityDepartmentId, d.universityDepartmentName, e.startingDate, e.graduationDate) "

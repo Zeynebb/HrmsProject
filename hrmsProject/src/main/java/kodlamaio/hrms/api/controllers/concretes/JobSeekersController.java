@@ -42,15 +42,36 @@ public class JobSeekersController {
 	public DataResult<List<JobSeeker>> getAll() {
 		return this.jobSeekerService.getAll();
 	}
+
 	@GetMapping("/getJobSeekerByUserId")
-	public DataResult<JobSeeker> getJobSeekerByUserId(int userId){
+	public DataResult<JobSeeker> getJobSeekerByUserId(int userId) {
 		return this.jobSeekerService.getJobSeekerByUserId(userId);
 	}
 
 	@PostMapping("/register")
 	public Result register(@Valid @RequestBody JobSeeker jobSeeker, @RequestParam("passwordAgain") String passwordAgain,
 			@RequestParam("validationCode") long validationCode) {
-		return this.jobSeekerService.register(jobSeeker, passwordAgain,validationCode);
+		return this.jobSeekerService.register(jobSeeker, passwordAgain, validationCode);
+	}
+
+	@PostMapping("/emailVerification")
+	public Result emailVerification(@Valid @RequestBody JobSeeker jobSeeker,
+			@RequestParam("passwordAgain") String passwordAgain, @RequestParam("validationCode") long validationCode)
+			throws Exception {
+		return this.jobSeekerService.emailVerification(jobSeeker, passwordAgain, validationCode);
+	}
+
+	@PostMapping("/emailSending")
+	public Result emailSending(@RequestParam String email) throws Exception {
+		return this.jobSeekerService.emailSending(email);
+	}
+	@GetMapping("/emailIsItUsed")
+	public boolean emailIsItUsed(String email) {
+		return this.jobSeekerService.emailIsItUsed(email);
+	}
+	@GetMapping("/nationalityIdIsItUsed")
+	public boolean nationalityIdIsItUsed(String nationalityId) {
+		return this.jobSeekerService.nationalityIdIsItUsed(nationalityId);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

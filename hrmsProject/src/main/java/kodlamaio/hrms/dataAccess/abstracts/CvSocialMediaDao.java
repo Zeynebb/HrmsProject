@@ -10,6 +10,9 @@ import kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto;
 
 public interface CvSocialMediaDao extends JpaRepository<CvSocialMedia, Integer>{
 	
+	Long deleteByCv_CvId(int cvId);
+	
+	Long deleteByCvSocialMediaId(int cvSocialMediaId);
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.CvSocialMediaWithSocialMediaDto(c.cvSocialMediaId ,s.socialMediaId "
 			+ ",s.socialMediaName, c.link) "

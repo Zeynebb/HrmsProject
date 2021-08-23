@@ -12,6 +12,8 @@ import kodlamaio.hrms.entities.dtos.CvWithJobSeekerDto;
 
 public interface CvDao extends JpaRepository<Cv, Integer>{
 	
+	Long deleteByCvId(int cvId);
+	
 	@Query("From Cv c where c.jobSeeker.userId=?1")
 	List<Cv> getByCvIdForJobSeekerId(int userId);
 	
@@ -25,6 +27,11 @@ public interface CvDao extends JpaRepository<Cv, Integer>{
 	@Query("update Cv set creationDate=?2 "
 			+ "where cvId=?1")
 	int updateCvSetCreationDate(int cvId, Date creationDate);
+	
+	@Modifying
+	@Query("update Cv set objective=null "
+			+ "where cvId=?1")
+	int deleteCvSetObjective(int cvId);
 	
 		
 }
